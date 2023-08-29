@@ -39,29 +39,15 @@ namespace Sportshop.API.Controllers
 
             if (!VerifyPasswordHash(request.Password, user.PasswordHash, user.PasswordSalt)) return BadRequest("User or password not valid");
 
-            string token = CreateToken();
+            string token = CreateToken(user);
+
+            var refreshToken = GenerateRefreshToken();
+            SetRefreshToken(refreshToken);
+
             return Ok(token);
         }
 
-        private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
-        {
-            using (var hmac = new HMACSHA512())
-            {
-                passwordSalt = hmac.Key;
-                passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
-            }
-        }
-
-        private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
-        {
-            using (var hmac = new HMACSHA512(passwordSalt))
-            {
-                var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
-                return computedHash.SequenceEqual(passwordHash);
-            }
-        }
-
-        private string CreateToken()
+        private string CreateToken(User user)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_configuration["Authentication:SecretForKey"]));
 
@@ -85,36 +71,71 @@ namespace Sportshop.API.Controllers
             return tokenToReturn;
         }
 
-        //public class AuthenticationRequestBody
-        //{
-        //    public string Username { get; set; }
-        //    public string Password { get; set; }
-        //}
+        [HttpPost("refresh-token")]
+        private async Task<ActionResult<string>> RefreshToken()
+        {
+            var refreshToken = Request.Cookies["refreshToken"];
 
-        //private class SportshopUser
-        //{
-        //    public Guid Id { get; set; }
+            // W przypadku bazy danych szukamy użytkownika, który obecnie posiada dany refreshtoken i wtedy walidujemy względem niego
+            if (!user.RefreshToken.Equals(refreshToken))
+            {
+                return Unauthorized("Invalid Refresh Token");
+            }
+            else if (user.TokenExpires < DateTime.Now)
+            {
+                return Unauthorized("Token expired");
+            }
 
-        //    public string Username { get; set; }
+            string token = CreateToken(user);
+            var newRefreshToken = GenerateRefreshToken();
+            SetRefreshToken(newRefreshToken);
 
-        //    public string City { get; set; }
+            return Ok(token);
+        }
 
-        //    public SportshopUser(Guid id, string username, string city)
-        //    {
-        //        Id = id;
-        //        Username = username;
-        //        City = city;
-        //    }
-        //}
+        private RefreshToken GenerateRefreshToken()
+        {
+            var refreshToken = new RefreshToken()
+            {
+                Token = Convert.ToBase64String(RandomNumberGenerator.GetBytes(64)),
+                Created = DateTime.Now,
+                Expires = DateTime.Now.AddDays(7)
+            };
 
-        
+            return refreshToken;
+        }
 
-        //private SportshopUser ValidateUserCredentials(string username, string password)
-        //{
-        //    return new SportshopUser(
-        //        Guid.NewGuid(),
-        //        "karaokesound",
-        //        "Gdynia");
-        //}
+        private void SetRefreshToken(RefreshToken newRefreshToken)
+        {
+            var cookieOptions = new CookieOptions()
+            {
+                HttpOnly = true,
+                Expires = newRefreshToken.Expires,
+
+            };
+            Response.Cookies.Append("refreshToken", newRefreshToken.Token, cookieOptions);
+
+            user.RefreshToken = newRefreshToken.Token;
+            user.TokenCreated = newRefreshToken.Created;
+            user.TokenExpires = newRefreshToken.Expires;
+        }
+
+        private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
+        {
+            using (var hmac = new HMACSHA512())
+            {
+                passwordSalt = hmac.Key;
+                passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+            }
+        }
+
+        private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
+        {
+            using (var hmac = new HMACSHA512(passwordSalt))
+            {
+                var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+                return computedHash.SequenceEqual(passwordHash);
+            }
+        }
     }
 }
