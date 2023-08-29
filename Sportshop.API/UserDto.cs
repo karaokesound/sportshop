@@ -1,0 +1,11 @@
+﻿namespace Sportshop.API
+{
+    public class UserDto
+    {
+        public string Username { get; set; } = string.Empty;
+
+        public string Password { get; set; } = string.Empty;
+
+        public string City { get; set; } = string.Empty;
+    }
+}

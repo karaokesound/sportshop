@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Sportshop.Persistence;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +14,21 @@ builder.Services.AddSwaggerGen();
 // My services
 builder.Services.AddDbContext<SportshopDbContext>(dbContextOptions =>
     dbContextOptions.UseSqlServer(builder.Configuration["ConnectionStrings:SportshopDBConnectionString"]));
+
+builder.Services.AddAuthentication("Bearer")
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new()
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = builder.Configuration["Authentication:Issuer"],
+            ValidAudience = builder.Configuration["Authentication:Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(
+                Encoding.ASCII.GetBytes(builder.Configuration["Authentication:SecretForKey"]))
+        };
+    });
 
 var app = builder.Build();
 
@@ -26,7 +43,9 @@ app.UseHttpsRedirection();
 
 app.UseRouting();
 
-app.MapControllers();
+app.UseAuthentication();
+
+app.UseAuthorization();
 
 app.UseEndpoints(endpoints =>
 {
