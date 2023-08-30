@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Sportshop.Domain.Entities;
 
 namespace Sportshop.Persistence.Configurations
 {

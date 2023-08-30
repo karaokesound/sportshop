@@ -22,7 +22,7 @@ namespace Sportshop.Persistence.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("Sportshop.Entity.Entities.UserEntity", b =>
+            modelBuilder.Entity("Sportshop.Domain.Entities.UserEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -70,7 +70,7 @@ namespace Sportshop.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("3ff15c44-abbb-48b8-9b36-dfd2157a5607"),
+                            Id = new Guid("7a0b2dd0-a41f-4237-b63a-79a5a0603f53"),
                             Age = 21,
                             City = "City1",
                             FirstName = "Jan",
@@ -82,7 +82,7 @@ namespace Sportshop.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("e65ac179-5bd6-4356-a1d7-d80b1202b31e"),
+                            Id = new Guid("55d80fe9-84a6-48f2-8007-44cfe1ced61e"),
                             Age = 22,
                             City = "City2",
                             FirstName = "Andrzej",
@@ -94,7 +94,7 @@ namespace Sportshop.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("e1837a17-5e47-4208-b361-9b561fdd2d30"),
+                            Id = new Guid("a098b00e-e251-464a-994d-c2250895f6ce"),
                             Age = 23,
                             City = "City3",
                             FirstName = "Piotr",
@@ -106,7 +106,7 @@ namespace Sportshop.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("72aab7ed-ac67-4ca1-bc53-850ef22b37fa"),
+                            Id = new Guid("cc2f769a-6e14-4780-b2cc-21a13eaafd38"),
                             Age = 24,
                             City = "City4",
                             FirstName = "Kamil",
@@ -118,7 +118,7 @@ namespace Sportshop.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("41244f64-995b-40c1-a461-58c6efea0214"),
+                            Id = new Guid("1f8495b1-0969-4dcf-b94a-2764d1978e69"),
                             Age = 25,
                             City = "City5",
                             FirstName = "Leon",
@@ -130,7 +130,7 @@ namespace Sportshop.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("f0121577-57c6-438e-9733-e5a21160db4c"),
+                            Id = new Guid("845d6324-6e38-4115-b5ca-1dcbd45f74fc"),
                             Age = 26,
                             City = "City6",
                             FirstName = "Karol",
@@ -142,7 +142,7 @@ namespace Sportshop.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d3edc55b-2ad0-47ef-b8ca-8f75c94a4dcd"),
+                            Id = new Guid("5e590b39-9711-46ce-aa92-1d3f5367a86a"),
                             Age = 27,
                             City = "City7",
                             FirstName = "Andrzej",
@@ -154,7 +154,7 @@ namespace Sportshop.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("6cf7e814-debc-4ade-8796-fa23f2e898d1"),
+                            Id = new Guid("f4c46df4-4a8a-4033-99bc-65544623d136"),
                             Age = 28,
                             City = "City8",
                             FirstName = "Marzena",
@@ -166,7 +166,7 @@ namespace Sportshop.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("7d270d2f-9341-47e4-a731-f8e1d3596ead"),
+                            Id = new Guid("5c802b03-58fe-4fa1-8c52-46d79b42d639"),
                             Age = 29,
                             City = "City9",
                             FirstName = "Joanna",
@@ -178,7 +178,7 @@ namespace Sportshop.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("468d0c1f-aa07-47e9-be37-656e38c2c692"),
+                            Id = new Guid("6aab6139-4995-4fd0-92f9-3a6c050c1471"),
                             Age = 30,
                             City = "City10",
                             FirstName = "Weronika",
@@ -190,7 +190,7 @@ namespace Sportshop.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("f325b0b4-f490-431e-b505-448a427232c2"),
+                            Id = new Guid("df22440c-346e-42ea-adf2-222afa1b164d"),
                             Age = 31,
                             City = "City11",
                             FirstName = "",
@@ -202,7 +202,7 @@ namespace Sportshop.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("40c0645b-cac9-46e7-9731-44602c45fbba"),
+                            Id = new Guid("be35196e-4804-4bcc-9e59-34df791b312f"),
                             Age = 32,
                             City = "City12",
                             FirstName = "",

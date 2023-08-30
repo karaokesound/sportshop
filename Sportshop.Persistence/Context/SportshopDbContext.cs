@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Sportshop.Entity.Entities;
+using Sportshop.Domain.Entities;
 
 namespace Sportshop.Persistence.Context
 {
