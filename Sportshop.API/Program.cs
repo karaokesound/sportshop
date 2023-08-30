@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Sportshop.API.Services;
 using Sportshop.Application.Repositories;
 using Sportshop.Persistence.Context;
 using Swashbuckle.AspNetCore.Filters;
@@ -46,6 +47,7 @@ builder.Services.AddAuthentication("Bearer")
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 var app = builder.Build();
 
