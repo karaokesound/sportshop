@@ -1,4 +1,4 @@
-﻿namespace Sportshop.API.Models.Dto
+﻿namespace Sportshop.Application.Dtos
 {
     public class UserDto
     {

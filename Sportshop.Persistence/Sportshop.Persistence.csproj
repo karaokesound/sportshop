@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Sportshop.Entity\Sportshop.Entity.csproj" />
+    <ProjectReference Include="..\Sportshop.Domain\Sportshop.Domain.csproj" />
   </ItemGroup>
 
 </Project>

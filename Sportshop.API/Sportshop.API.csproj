@@ -18,7 +18,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Sportshop.Application\Sportshop.Application.csproj" />
-    <ProjectReference Include="..\Sportshop.Entity\Sportshop.Entity.csproj" />
     <ProjectReference Include="..\Sportshop.Persistence\Sportshop.Persistence.csproj" />
   </ItemGroup>
 

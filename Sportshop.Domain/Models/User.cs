@@ -1,4 +1,4 @@
-﻿namespace Sportshop.API
+﻿namespace Sportshop.Domain.Models
 {
     public class User
     {

@@ -1,8 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Sportshop.Entity.Entities;
 
-namespace Sportshop.Persistence.Configuration
+namespace Sportshop.Persistence.Configurations
 {
     public class UserEntityConfiguration : IEntityTypeConfiguration<UserEntity>
     {
