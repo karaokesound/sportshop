@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using Sportshop.API.Models.Dto;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
@@ -11,7 +12,10 @@ namespace Sportshop.API.Controllers
     [ApiController]
     public class AuthenticationController : ControllerBase
     {
-        public static User user = new User();
+        public static User user = new(
+            "karaokesound",
+            "Gdynia",
+            25);
 
         private readonly IConfiguration _configuration;
 
