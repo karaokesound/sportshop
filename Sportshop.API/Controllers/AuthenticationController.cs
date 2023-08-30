@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Sportshop.Application.Dtos;
+using Sportshop.Application.Repositories;
 using Sportshop.Domain.Models;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -20,9 +21,13 @@ namespace Sportshop.API.Controllers
 
         private readonly IConfiguration _configuration;
 
-        public AuthenticationController(IConfiguration configuration)
+        private readonly IUserRepository _userRepository;
+
+        public AuthenticationController(IConfiguration configuration,
+            IUserRepository userRepository)
         {
             _configuration = configuration;
+            _userRepository = userRepository;
         }
 
         [HttpPost("register")]
@@ -30,6 +35,8 @@ namespace Sportshop.API.Controllers
         {
             CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
 
+            // Map DTO object to Entity object
+            // Add Entity object to the database
             user.Username = request.Username;
             user.PasswordHash = passwordHash;
             user.PasswordSalt = passwordSalt;

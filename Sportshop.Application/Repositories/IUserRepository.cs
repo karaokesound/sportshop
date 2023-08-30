@@ -4,16 +4,16 @@ namespace Sportshop.Application.Repositories
 {
     public interface IUserRepository
     {
-        Task<UserEntity> GetUsers();
+        Task<List<UserEntity>> GetUsersAsync();
 
-        Task<UserEntity> GetUser(Guid id);
+        Task<UserEntity> GetUserAsync(Guid id);
 
-        Task<UserEntity> GetUserByName(string username);
+        Task<UserEntity> GetUserByNameAsync(string username);
 
-        Task<bool> CreateUser(UserEntity user);
-
-        Task<bool> UpdateUser(UserEntity user);
+        Task CreateUserAsync(UserEntity user);
 
         void DeleteUser(Guid id);
+
+        Task<bool> SaveChangesAsync();
     }
 }

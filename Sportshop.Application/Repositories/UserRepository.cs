@@ -1,4 +1,5 @@
-﻿using Sportshop.Domain.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using Sportshop.Domain.Entities;
 using Sportshop.Persistence.Context;
 
 namespace Sportshop.Application.Repositories
@@ -12,34 +13,59 @@ namespace Sportshop.Application.Repositories
             _context = context;
         }
 
-        public Task<UserEntity> GetUsers()
+        public async Task<List<UserEntity>> GetUsersAsync()
         {
-            throw new NotImplementedException();
+            return await _context.Users.ToListAsync();
         }
 
-        public Task<UserEntity> GetUser(Guid id)
+        public async Task<UserEntity> GetUserAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var user = await _context.Users
+                .FirstOrDefaultAsync(u => u.Id == id);
+
+            if (user == null) throw new Exception("This user doesn't exist in the database");
+
+            return user;
         }
 
-        public Task<UserEntity> GetUserByName(string username)
+        public async Task<UserEntity> GetUserByNameAsync(string username)
         {
-            throw new NotImplementedException();
+            var user = await _context.Users
+                .FirstOrDefaultAsync(u => u.Username == username);
+
+            if (user == null) throw new Exception("This user doesn't exist in the database");
+
+            return user;
         }
 
-        public Task<bool> CreateUser(UserEntity user)
+        public async Task CreateUserAsync(UserEntity user)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> UpdateUser(UserEntity user)
-        {
-            throw new NotImplementedException();
+            await _context.Users.AddAsync(
+                new UserEntity(user.Username, user.City, user.Age)
+                {
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    PasswordHash = user.PasswordHash,
+                    PasswordSalt = user.PasswordSalt,
+                    RefreshToken = user.RefreshToken,
+                    TokenCreated = user.TokenCreated,
+                    TokenExpires = user.TokenExpires,
+                });
         }
 
         public void DeleteUser(Guid id)
         {
-            throw new NotImplementedException();
+            var user = _context.Users
+                .FirstOrDefault(u => u.Id == id);
+
+            if (user == null) throw new Exception("This user doesn't exist in the database");
+
+            _context.Users.Remove(user);
+        }
+
+        public async Task<bool> SaveChangesAsync()
+        {
+            return await _context.SaveChangesAsync() >= 0;
         }
     }
 }
