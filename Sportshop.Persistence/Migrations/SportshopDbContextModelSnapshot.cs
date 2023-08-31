@@ -70,8 +70,8 @@ namespace Sportshop.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("7a0b2dd0-a41f-4237-b63a-79a5a0603f53"),
-                            Age = 21,
+                            Id = new Guid("61e43f2f-5b6f-43a4-a398-5eac427fd0fb"),
+                            Age = 0,
                             City = "City1",
                             FirstName = "Jan",
                             LastName = "Nowak",
@@ -82,8 +82,8 @@ namespace Sportshop.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("55d80fe9-84a6-48f2-8007-44cfe1ced61e"),
-                            Age = 22,
+                            Id = new Guid("660ff93b-2f8e-4dbe-bed7-5436cbe33978"),
+                            Age = 0,
                             City = "City2",
                             FirstName = "Andrzej",
                             LastName = "Kowalski",
@@ -94,8 +94,8 @@ namespace Sportshop.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("a098b00e-e251-464a-994d-c2250895f6ce"),
-                            Age = 23,
+                            Id = new Guid("e56c1994-ed3f-4f2c-bd32-474a6673c2a0"),
+                            Age = 0,
                             City = "City3",
                             FirstName = "Piotr",
                             LastName = "Kowalczyk",
@@ -106,8 +106,8 @@ namespace Sportshop.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("cc2f769a-6e14-4780-b2cc-21a13eaafd38"),
-                            Age = 24,
+                            Id = new Guid("cf0ba25f-583f-4fa0-bb10-bb39da96cc5c"),
+                            Age = 0,
                             City = "City4",
                             FirstName = "Kamil",
                             LastName = "Grabak",
@@ -118,8 +118,8 @@ namespace Sportshop.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("1f8495b1-0969-4dcf-b94a-2764d1978e69"),
-                            Age = 25,
+                            Id = new Guid("35618e63-775e-4e72-868d-5061bf04911c"),
+                            Age = 0,
                             City = "City5",
                             FirstName = "Leon",
                             LastName = "Ziutkiewicz",
@@ -130,11 +130,11 @@ namespace Sportshop.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("845d6324-6e38-4115-b5ca-1dcbd45f74fc"),
-                            Age = 26,
+                            Id = new Guid("9f285aad-92bc-45e8-b6fa-b6cde5dbc551"),
+                            Age = 0,
                             City = "City6",
-                            FirstName = "Karol",
-                            LastName = "Strasburger",
+                            FirstName = "",
+                            LastName = "",
                             RefreshToken = "",
                             TokenCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TokenExpires = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -142,75 +142,15 @@ namespace Sportshop.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("5e590b39-9711-46ce-aa92-1d3f5367a86a"),
-                            Age = 27,
+                            Id = new Guid("d255ba35-a9b2-4322-93cd-0a4882be08a9"),
+                            Age = 0,
                             City = "City7",
-                            FirstName = "Andrzej",
-                            LastName = "Kipik",
+                            FirstName = "",
+                            LastName = "",
                             RefreshToken = "",
                             TokenCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TokenExpires = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Username = "User7"
-                        },
-                        new
-                        {
-                            Id = new Guid("f4c46df4-4a8a-4033-99bc-65544623d136"),
-                            Age = 28,
-                            City = "City8",
-                            FirstName = "Marzena",
-                            LastName = "Bogacz",
-                            RefreshToken = "",
-                            TokenCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TokenExpires = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Username = "User8"
-                        },
-                        new
-                        {
-                            Id = new Guid("5c802b03-58fe-4fa1-8c52-46d79b42d639"),
-                            Age = 29,
-                            City = "City9",
-                            FirstName = "Joanna",
-                            LastName = "Leśniewska",
-                            RefreshToken = "",
-                            TokenCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TokenExpires = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Username = "User9"
-                        },
-                        new
-                        {
-                            Id = new Guid("6aab6139-4995-4fd0-92f9-3a6c050c1471"),
-                            Age = 30,
-                            City = "City10",
-                            FirstName = "Weronika",
-                            LastName = "Kalinka",
-                            RefreshToken = "",
-                            TokenCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TokenExpires = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Username = "User10"
-                        },
-                        new
-                        {
-                            Id = new Guid("df22440c-346e-42ea-adf2-222afa1b164d"),
-                            Age = 31,
-                            City = "City11",
-                            FirstName = "",
-                            LastName = "",
-                            RefreshToken = "",
-                            TokenCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TokenExpires = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Username = "User11"
-                        },
-                        new
-                        {
-                            Id = new Guid("be35196e-4804-4bcc-9e59-34df791b312f"),
-                            Age = 32,
-                            City = "City12",
-                            FirstName = "",
-                            LastName = "",
-                            RefreshToken = "",
-                            TokenCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TokenExpires = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Username = "User12"
                         });
                 });
 #pragma warning restore 612, 618

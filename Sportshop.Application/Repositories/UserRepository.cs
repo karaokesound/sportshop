@@ -33,24 +33,12 @@ namespace Sportshop.Application.Repositories
             var user = await _context.Users
                 .FirstOrDefaultAsync(u => u.Username == username);
 
-            if (user == null) throw new Exception("This user doesn't exist in the database");
-
-            return user;
+            return user!;
         }
 
         public async Task CreateUserAsync(UserEntity user)
         {
-            await _context.Users.AddAsync(
-                new UserEntity(user.Username, user.City, user.Age)
-                {
-                    FirstName = user.FirstName,
-                    LastName = user.LastName,
-                    PasswordHash = user.PasswordHash,
-                    PasswordSalt = user.PasswordSalt,
-                    RefreshToken = user.RefreshToken,
-                    TokenCreated = user.TokenCreated,
-                    TokenExpires = user.TokenExpires,
-                });
+            await _context.Users.AddAsync(user);
         }
 
         public void DeleteUser(Guid id)
@@ -61,6 +49,14 @@ namespace Sportshop.Application.Repositories
             if (user == null) throw new Exception("This user doesn't exist in the database");
 
             _context.Users.Remove(user);
+        }
+
+        public async Task<UserEntity> GetUserByRefreshToken(string refreshToken)
+        {
+            var user = await _context.Users
+                .FirstOrDefaultAsync(u => u.RefreshToken == refreshToken);
+
+            return user;
         }
 
         public async Task<bool> SaveChangesAsync()

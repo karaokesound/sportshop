@@ -17,7 +17,7 @@ namespace Sportshop.Persistence.Configurations
             builder.Property(u => u.LastName);
             builder.Property(u => u.City);
             builder.Property(u => u.Age);
-            
+
             builder.Property(u => u.PasswordHash);
             builder.Property(u => u.PasswordSalt);
             builder.Property(u => u.RefreshToken);

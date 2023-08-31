@@ -4,13 +4,13 @@
     {
         public Guid Id { get; set; }
 
-        public string Username { get; set; }
+        public string Username { get; set; } = null!;
 
         public string FirstName { get; set; } = string.Empty;
 
         public string LastName { get; set; } = string.Empty;
 
-        public string City { get; set; }
+        public string City { get; set; } = null!;
 
         public int Age { get; set; }
 
@@ -23,13 +23,5 @@
         public DateTime TokenCreated { get; set; }
 
         public DateTime TokenExpires { get; set; }
-
-        public UserEntity(string username, string city, int age)
-        {
-            Id = Guid.NewGuid();
-            Username = username;
-            City = city;
-            Age = age;
-        }
     }
 }

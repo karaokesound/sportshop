@@ -1,11 +1,28 @@
-﻿namespace Sportshop.Application.Dtos
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Sportshop.Application.Dtos
 {
     public class UserDto
     {
-        public string Username { get; set; } = string.Empty;
+        [Required]
+        [MaxLength(25)]
+        public string Username { get; set; } = null!;
 
-        public string Password { get; set; } = string.Empty;
+        [Required]
+        [MaxLength(25)]
+        public string Password { get; set; } = null!;
 
-        public string City { get; set; } = string.Empty;
+        [MaxLength(25)]
+        public string FirstName { get; set; } = string.Empty;
+
+        [MaxLength(25)]
+        public string LastName { get; set; } = string.Empty;
+
+        [Required]
+        [MaxLength(25)]
+        public string City { get; set; } = null!;
+
+        [Range(18, 50, ErrorMessage = "Age must be between 18 and 99.")]
+        public int Age { get; set; }
     }
 }

@@ -3,7 +3,6 @@
     public class User
     {
         public Guid Id { get; set; }
-
         public string Username { get; set; }
 
         public string FirstName { get; set; } = string.Empty;
@@ -24,12 +23,11 @@
 
         public DateTime TokenExpires { get; set; }
 
-        public User(string username, string city, int age)
+        public User(string username, string city)
         {
             Id = Guid.NewGuid();
             Username = username;
             City = city;
-            Age = age;
         }
     }
 }

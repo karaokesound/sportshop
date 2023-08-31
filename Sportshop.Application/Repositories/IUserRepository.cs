@@ -14,6 +14,8 @@ namespace Sportshop.Application.Repositories
 
         void DeleteUser(Guid id);
 
+        Task<UserEntity> GetUserByRefreshToken(string refreshToken);
+
         Task<bool> SaveChangesAsync();
     }
 }

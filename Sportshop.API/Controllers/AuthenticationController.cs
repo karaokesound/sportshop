@@ -1,12 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
 using Sportshop.API.Services;
 using Sportshop.Application.Dtos;
+using Sportshop.Application.Repositories;
+using Sportshop.Domain.Entities;
 using Sportshop.Domain.Models;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Security.Cryptography;
-using System.Text;
 
 namespace Sportshop.API.Controllers
 {
@@ -14,112 +11,69 @@ namespace Sportshop.API.Controllers
     [ApiController]
     public class AuthenticationController : ControllerBase
     {
-        public static User user = new(
-            "karaokesound",
-            "Gdynia",
-            25);
-
-        private readonly IConfiguration _configuration;
-
         private readonly IAuthService _service;
 
-        public AuthenticationController(IConfiguration configuration,
-            IAuthService service)
+        private readonly IUserRepository _userRepository;
+
+        public AuthenticationController(IAuthService service, IUserRepository userRepository)
         {
-            _configuration = configuration;
             _service = service;
+            _userRepository = userRepository;
         }
 
         [HttpPost("register")]
-        public async Task<ActionResult<User>> Register(UserDto request)
+        public async Task<ActionResult<User>> Register(UserDto requestedUser)
         {
-            CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
+            if (!await _service.UserDataValidation(requestedUser, 0)) return BadRequest("This username already exists. Try with another one!");
 
-            _service.CreateUser();
+           _service.CreatePasswordHash(requestedUser.Password, out byte[] passwordHash, out byte[] passwordSalt);
 
-            // Map DTO object to Entity object
-            // Add Entity object to the database
-            user.Username = request.Username;
-            user.PasswordHash = passwordHash;
-            user.PasswordSalt = passwordSalt;
+            await _service.CreateUser(requestedUser, passwordHash, passwordSalt);
 
-            return Ok(user);
+            return Ok("User succesfully created!");
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult<string>> Login(UserDto request)
+        public async Task<ActionResult<string>> Login(UserDto requestedUser)
         {
-            if (user.Username != request.Username) return BadRequest("User not found.");
+            if (!await _service.UserDataValidation(requestedUser, 1)) return BadRequest("User or password is not valid. Check if you've entered correct username and password.");
 
-            if (!VerifyPasswordHash(request.Password, user.PasswordHash, user.PasswordSalt)) return BadRequest("User or password not valid");
+            var user = await _userRepository.GetUserByNameAsync(requestedUser.Username);
 
-            string token = CreateToken(user);
+            string userToken = _service.GenerateToken(user);
+            RefreshToken userRefreshToken = _service.GenerateRefreshToken();
 
-            var refreshToken = GenerateRefreshToken();
-            SetRefreshToken(refreshToken);
+            SetRefreshToken(userRefreshToken, user);
 
-            return Ok(token);
-        }
-
-        private string CreateToken(User user)
-        {
-            var securityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_configuration["Authentication:SecretForKey"]));
-
-            var signingCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-
-            var claimsForToken = new List<Claim>();
-            claimsForToken.Add(new Claim("given_name", user.Username.ToString()));
-            claimsForToken.Add(new Claim("city", user.City.ToString()));
-
-            var jwtSecurityToken = new JwtSecurityToken(
-                _configuration["Authentication:Issuer"],
-                _configuration["Authentication:Audience"],
-                claimsForToken,
-                DateTime.UtcNow,
-                DateTime.UtcNow.AddHours(1),
-                signingCredentials);
-
-            var tokenToReturn = new JwtSecurityTokenHandler()
-                .WriteToken(jwtSecurityToken);
-
-            return tokenToReturn;
+            return Ok(userToken);
         }
 
         [HttpPost("refresh-token")]
-        private async Task<ActionResult<string>> RefreshToken()
+        public async Task<ActionResult<string>> RefreshToken()
         {
             var refreshToken = Request.Cookies["refreshToken"];
 
-            // W przypadku bazy danych szukamy użytkownika, który obecnie posiada dany refreshtoken i wtedy walidujemy względem niego
-            if (!user.RefreshToken.Equals(refreshToken))
+            var user = await _userRepository.GetUserByRefreshToken(refreshToken!);
+
+            if (user == null
+                ||!user.RefreshToken.Equals(refreshToken))
             {
-                return Unauthorized("Invalid Refresh Token");
+                return Unauthorized("Something gone wrong! Make sure you've entered valid login data. If so, it seems your refresh token is invalid.");
             }
             else if (user.TokenExpires < DateTime.Now)
             {
-                return Unauthorized("Token expired");
+                return Unauthorized("Your token expired.");
             }
 
-            string token = CreateToken(user);
-            var newRefreshToken = GenerateRefreshToken();
-            SetRefreshToken(newRefreshToken);
+            string userToken = _service.GenerateToken(user);
 
-            return Ok(token);
+            var newUserRefreshToken = _service.GenerateRefreshToken();
+            SetRefreshToken(newUserRefreshToken, user);
+
+            return Ok(userToken);
         }
 
-        private RefreshToken GenerateRefreshToken()
-        {
-            var refreshToken = new RefreshToken()
-            {
-                Token = Convert.ToBase64String(RandomNumberGenerator.GetBytes(64)),
-                Created = DateTime.Now,
-                Expires = DateTime.Now.AddDays(7)
-            };
-
-            return refreshToken;
-        }
-
-        private void SetRefreshToken(RefreshToken newRefreshToken)
+        private void SetRefreshToken(RefreshToken newRefreshToken, UserEntity user)
         {
             var cookieOptions = new CookieOptions()
             {
@@ -132,24 +86,8 @@ namespace Sportshop.API.Controllers
             user.RefreshToken = newRefreshToken.Token;
             user.TokenCreated = newRefreshToken.Created;
             user.TokenExpires = newRefreshToken.Expires;
-        }
 
-        private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
-        {
-            using (var hmac = new HMACSHA512())
-            {
-                passwordSalt = hmac.Key;
-                passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
-            }
-        }
-
-        private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
-        {
-            using (var hmac = new HMACSHA512(passwordSalt))
-            {
-                var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
-                return computedHash.SequenceEqual(passwordHash);
-            }
+            _userRepository.SaveChangesAsync();
         }
     }
 }
