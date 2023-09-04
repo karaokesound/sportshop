@@ -48,6 +48,7 @@ builder.Services.AddAuthentication("Bearer")
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IProductControllerService, ProductControllerService>();
 
 var app = builder.Build();
 
