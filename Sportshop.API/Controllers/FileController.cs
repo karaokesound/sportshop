@@ -21,5 +21,12 @@ namespace Sportshop.API.Controllers
 
             return Ok("Image added successfully!");
         }
+
+        //[HttpGet]
+        //[Route("fileId")]
+        //public async Task<ActionResult> GetFile(int fileId)
+        //{
+        //    var files = Directory.GetFiles(@"C:\\Users\\karao\\source\\repos\\sportshop\\Sportshop.Persistence\\Thumbnails", );
+        //}
     }
 }

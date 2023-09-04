@@ -23,5 +23,7 @@
         public DateTime TokenCreated { get; set; }
 
         public DateTime TokenExpires { get; set; }
+
+        public ICollection<ProductEntity>? Products { get; set; }
     }
 }

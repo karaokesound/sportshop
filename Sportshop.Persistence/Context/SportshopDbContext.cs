@@ -7,6 +7,8 @@ namespace Sportshop.Persistence.Context
     {
         public DbSet<UserEntity> Users { get; set; } = null!;
 
+        public DbSet<ProductEntity> Products { get; set; } = null!;
+
         public SportshopDbContext(DbContextOptions<SportshopDbContext> options) : base(options)
         {
 

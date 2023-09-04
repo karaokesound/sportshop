@@ -23,6 +23,11 @@ namespace Sportshop.Persistence.Configurations
             builder.Property(u => u.RefreshToken);
             builder.Property(u => u.TokenCreated);
             builder.Property(u => u.TokenExpires);
+
+            // UserEntity(one) - ProductEntity(many)
+            builder.HasMany(p => p.Products)
+                .WithOne(u => u.User)
+                .HasForeignKey(p => p.UserId);
         }
     }
 }

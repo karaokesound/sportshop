@@ -1,4 +1,6 @@
-﻿namespace Sportshop.Domain.Models
+﻿using Sportshop.Domain.Entities;
+
+namespace Sportshop.Domain.Models
 {
     public class User
     {
@@ -23,11 +25,15 @@
 
         public DateTime TokenExpires { get; set; }
 
+        public ICollection<Product>? Products { get; set; }
+
         public User(string username, string city)
         {
             Id = Guid.NewGuid();
             Username = username;
             City = city;
+
+            Products = new List<Product>();
         }
     }
 }

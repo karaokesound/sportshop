@@ -1,6 +1,6 @@
-﻿namespace Sportshop.Domain.Models
+﻿namespace Sportshop.Domain.Entities
 {
-    public class Product
+    public class ProductEntity
     {
         public Guid Id { get; set; }
 
@@ -16,6 +16,8 @@
 
         public int ThumbnailId { get; set; }
 
-        public User? User { get; set; }
+        public Guid UserId { get; set; }
+
+        public UserEntity? User { get; set; }
     }
 }
