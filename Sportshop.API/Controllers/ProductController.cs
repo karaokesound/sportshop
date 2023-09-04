@@ -14,11 +14,15 @@ namespace Sportshop.API.Controllers
 
         private readonly IMapper _mapper;
 
+        private readonly IResponseService _responseService;
+
         public ProductController(IProductControllerService service,
-            IMapper mapper)
+            IMapper mapper,
+            IResponseService responseService)
         {
             _service = service;
             _mapper = mapper;
+            _responseService = responseService;
         }
 
         [HttpPost]
@@ -33,7 +37,9 @@ namespace Sportshop.API.Controllers
 
             await _service.AddProduct(requestedProduct, productThumbnail);
 
-            return Ok("message");
+            var response = _responseService.ProductCreated(requestedProduct);
+
+            return Ok(response);
         }
 
         private async Task<Thumbnail> FormatThumbnail(ProductDto requestedProduct)
