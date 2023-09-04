@@ -13,7 +13,7 @@ namespace Sportshop.Application.Dtos
         public string Description { get; set; } = null!;
 
         [Required]
-        public int Price { get; set; }
+        public decimal Price { get; set; }
 
         [Required]
         public int Quantity { get; set; }
@@ -22,6 +22,6 @@ namespace Sportshop.Application.Dtos
         public string Seller { get; set; } = null!;
 
         [Required]
-        public Thumbnail Thumbnail { get; set; } = null!;
+        public ThumbnailDto Thumbnail { get; set; } = null!;
     }
 }

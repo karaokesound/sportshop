@@ -36,8 +36,8 @@ namespace Sportshop.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Price")
-                        .HasColumnType("int");
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
@@ -46,10 +46,10 @@ namespace Sportshop.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ThumbnailId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("ThumbnailId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("UserId")
+                    b.Property<Guid?>("UserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
@@ -107,7 +107,7 @@ namespace Sportshop.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("a60e9d9c-32c8-4dd8-bd94-6c77403a5d83"),
+                            Id = new Guid("d57ba5e6-6ca9-4a64-8cb1-4ea4eab6d0db"),
                             Age = 0,
                             City = "City1",
                             FirstName = "Jan",
@@ -119,7 +119,7 @@ namespace Sportshop.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("62b72beb-414d-4ef1-b8dc-3b65306400e0"),
+                            Id = new Guid("865c86ee-0511-4a2a-87d1-a503e07c51f5"),
                             Age = 0,
                             City = "City2",
                             FirstName = "Andrzej",
@@ -131,7 +131,7 @@ namespace Sportshop.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("548fdad9-cf3b-42ee-8cc1-b45753394eca"),
+                            Id = new Guid("e7be3653-4c8b-4b2e-af43-806bc0ae3332"),
                             Age = 0,
                             City = "City3",
                             FirstName = "Piotr",
@@ -143,7 +143,7 @@ namespace Sportshop.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("22f6284c-bcc1-4005-8d9b-f7e8eab90990"),
+                            Id = new Guid("ba89d110-2934-4d45-9075-3790ff507279"),
                             Age = 0,
                             City = "City4",
                             FirstName = "Kamil",
@@ -155,7 +155,7 @@ namespace Sportshop.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("cb4842bb-dc97-46ff-a0cd-887b6b1350e1"),
+                            Id = new Guid("0fc10d5a-905a-435c-8e1f-f5d547dacbc1"),
                             Age = 0,
                             City = "City5",
                             FirstName = "Leon",
@@ -167,7 +167,7 @@ namespace Sportshop.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("f8538c45-7772-4ef5-be9e-c067f3c69f92"),
+                            Id = new Guid("cfbfce84-fe95-4ab4-88ba-6a4bf52eb23d"),
                             Age = 0,
                             City = "City6",
                             FirstName = "",
@@ -179,7 +179,7 @@ namespace Sportshop.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("f413ff83-cb56-4953-b7e5-21db3dd99f3e"),
+                            Id = new Guid("2711a654-ae49-49a4-803a-2553e0b040bd"),
                             Age = 0,
                             City = "City7",
                             FirstName = "",
@@ -195,9 +195,7 @@ namespace Sportshop.Persistence.Migrations
                 {
                     b.HasOne("Sportshop.Domain.Entities.UserEntity", "User")
                         .WithMany("Products")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.Navigation("User");
                 });

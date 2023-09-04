@@ -8,15 +8,16 @@
 
         public string Description { get; set; } = null!;
 
-        public int Price { get; set; }
+        public decimal Price { get; set; }
 
         public int Quantity { get; set; }
 
         public string Seller { get; set; } = null!;
 
-        public int ThumbnailId { get; set; }
+        public Guid ThumbnailId { get; set; }
 
-        public Guid UserId { get; set; }
+        // Nullable foreign properties
+        public Guid? UserId { get; set; }
 
         public UserEntity? User { get; set; }
     }

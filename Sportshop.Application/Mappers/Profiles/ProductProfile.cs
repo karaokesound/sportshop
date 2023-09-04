@@ -11,6 +11,7 @@ namespace Sportshop.Application.Mappers.Profiles
         {
             CreateMap<ProductDto, Product>();
             CreateMap<ProductDto, ProductEntity>();
+            CreateMap<Product, ProductEntity>();
         }
     }
 }

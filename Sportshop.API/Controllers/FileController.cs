@@ -7,20 +7,20 @@ namespace Sportshop.API.Controllers
     [Route("api/file")]
     public class FileController : ControllerBase
     {
-        [HttpPost]
-        [Route("upload")]
-        public async Task<ActionResult> UploadFile([FromForm] Thumbnail file)
-        {
-            string path = Path.Combine(@"C:\\Users\\karao\\source\\repos\\sportshop\\Sportshop.Persistence\\Thumbnails",
-                file.FileName);
+        //[HttpPost]
+        //[Route("upload")]
+        //public async Task<ActionResult> UploadFile([FromForm] Thumbnail file)
+        //{
+        //    //string path = Path.Combine(@"C:\\Users\\karao\\source\\repos\\sportshop\\Sportshop.Persistence\\Thumbnails",
+        //    //    file.FileName);
 
-            using (Stream stream = new FileStream(path, FileMode.Create))
-            {
-                await file.Content.CopyToAsync(stream);
-            }
+        //    //using (Stream stream = new FileStream(path, FileMode.Create))
+        //    //{
+        //    //    await file.Content.CopyToAsync(stream);
+        //    //}
 
-            return Ok("Image added successfully!");
-        }
+        //    return Ok("Image added successfully!");
+        //}
 
         //[HttpGet]
         //[Route("fileId")]

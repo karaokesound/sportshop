@@ -1,13 +1,17 @@
-﻿namespace Sportshop.Application.Repositories
+﻿using Sportshop.Domain.Entities;
+
+namespace Sportshop.Application.Repositories
 {
     public interface IProductRepository
     {
-        Task AddAsync();
+        Task AddProductAsync(ProductEntity product);
 
-        Task UpdateAsync();
+        Task UpdateProductAsync();
 
-        Task PartiallyUpdateAsync();
+        Task PartiallyUpdateProductAsync();
 
-        Task DeleteAsync();
+        Task DeleteProductAsync();
+
+        Task<bool> SaveChangesAsync();
     }
 }

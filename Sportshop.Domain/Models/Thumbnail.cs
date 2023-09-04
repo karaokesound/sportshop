@@ -8,8 +8,8 @@ namespace Sportshop.Domain.Models
         [MaxLength(4)]
         public Guid Id { get; set; }
 
-        public string FileName { get; set; }
+        public string FileName { get; set; } = null!;
 
-        public IFormFile Content { get; set; }
+        public IFormFile Content { get; set; } = null!;
     }
 }

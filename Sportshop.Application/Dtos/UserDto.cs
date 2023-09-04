@@ -22,6 +22,7 @@ namespace Sportshop.Application.Dtos
         [MaxLength(25)]
         public string City { get; set; } = null!;
 
+        [Required]
         [Range(18, 50, ErrorMessage = "Age must be between 18 and 99.")]
         public int Age { get; set; }
     }

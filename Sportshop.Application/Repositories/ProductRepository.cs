@@ -1,25 +1,40 @@
-﻿namespace Sportshop.Application.Repositories
+﻿using Sportshop.Domain.Entities;
+using Sportshop.Persistence.Context;
+
+namespace Sportshop.Application.Repositories
 {
     public class ProductRepository : IProductRepository
     {
-        public Task AddAsync()
-        {
+        private readonly SportshopDbContext _context;
 
+        public ProductRepository(SportshopDbContext context)
+        {
+            _context = context;
         }
 
-        public Task DeleteAsync()
+        public async Task AddProductAsync(ProductEntity product)
+        {
+            await _context.Products.AddAsync(product);
+        }
+
+        public Task UpdateProductAsync()
         {
             throw new NotImplementedException();
         }
 
-        public Task PartiallyUpdateAsync()
+        public Task PartiallyUpdateProductAsync()
         {
             throw new NotImplementedException();
         }
 
-        public Task UpdateAsync()
+        public Task DeleteProductAsync()
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<bool> SaveChangesAsync()
+        {
+            return await _context.SaveChangesAsync() >= 0;
         }
     }
 }
