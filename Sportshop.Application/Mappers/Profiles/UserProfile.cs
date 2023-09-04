@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Sportshop.Application.Dtos;
+using Sportshop.Application.Dtos.User;
 using Sportshop.Domain.Entities;
 using Sportshop.Domain.Models;
 
@@ -12,6 +12,7 @@ namespace Sportshop.Application.Mappers.Profiles
             CreateMap<UserDto, User>();
             CreateMap<User, UserDto>();
             CreateMap<User, UserEntity>();
+            CreateMap<UserForLoginDto, UserDto>();
         }
     }
 }

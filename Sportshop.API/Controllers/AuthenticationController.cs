@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Sportshop.API.Services;
-using Sportshop.Application.Dtos;
+using Sportshop.Application.Dtos.User;
 using Sportshop.Application.Repositories;
 using Sportshop.Domain.Entities;
 using Sportshop.Domain.Models;
@@ -15,10 +16,15 @@ namespace Sportshop.API.Controllers
 
         private readonly IUserRepository _userRepository;
 
-        public AuthenticationController(IAuthService service, IUserRepository userRepository)
+        private readonly IMapper _mapper;
+
+        public AuthenticationController(IAuthService service, 
+            IUserRepository userRepository,
+            IMapper mapper)
         {
             _service = service;
             _userRepository = userRepository;
+            _mapper = mapper;
         }
 
         [HttpPost("register")]
@@ -34,16 +40,18 @@ namespace Sportshop.API.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult<string>> Login(UserDto requestedUser)
+        public async Task<ActionResult<string>> Login(UserForLoginDto requestedUser)
         {
-            if (!await _service.UserDataValidation(requestedUser, 1)) return BadRequest("User or password is not valid. Check if you've entered correct username and password.");
+            var user = _mapper.Map<UserDto>(requestedUser);
 
-            var user = await _userRepository.GetUserByNameAsync(requestedUser.Username);
+            if (!await _service.UserDataValidation(user, 1)) return BadRequest("User or password is not valid. Check if you've entered correct username and password.");
 
-            string userToken = _service.GenerateToken(user);
+            var dbUser = await _userRepository.GetUserByNameAsync(user.Username);
+
+            string userToken = _service.GenerateToken(dbUser);
             RefreshToken userRefreshToken = _service.GenerateRefreshToken();
 
-            SetRefreshToken(userRefreshToken, user);
+            SetRefreshToken(userRefreshToken, dbUser);
 
             return Ok(userToken);
         }

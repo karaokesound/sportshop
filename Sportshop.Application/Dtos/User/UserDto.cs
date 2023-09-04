@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Sportshop.Application.Dtos
+namespace Sportshop.Application.Dtos.User
 {
     public class UserDto
     {

@@ -1,4 +1,5 @@
-﻿using Sportshop.Domain.Models;
+﻿using Sportshop.Application.Dtos.Product;
+using Sportshop.Domain.Models;
 using System.ComponentModel.DataAnnotations;
 
 namespace Sportshop.Application.Dtos

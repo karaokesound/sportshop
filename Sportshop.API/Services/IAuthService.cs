@@ -1,4 +1,4 @@
-﻿using Sportshop.Application.Dtos;
+﻿using Sportshop.Application.Dtos.User;
 using Sportshop.Domain.Entities;
 
 namespace Sportshop.API.Services

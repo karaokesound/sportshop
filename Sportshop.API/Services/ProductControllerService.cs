@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Sportshop.Application.Dtos;
+using Sportshop.Application.Dtos.Product;
 using Sportshop.Application.Repositories;
 using Sportshop.Domain.Entities;
 using Sportshop.Domain.Models;

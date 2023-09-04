@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.IdentityModel.Tokens;
-using Sportshop.Application.Dtos;
+using Sportshop.Application.Dtos.User;
 using Sportshop.Application.Repositories;
 using Sportshop.Domain.Entities;
 using Sportshop.Domain.Models;
