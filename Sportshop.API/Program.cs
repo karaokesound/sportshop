@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using Sportshop.API.Services;
 using Sportshop.Application.Repositories;
+using Sportshop.Application.Services;
 using Sportshop.Persistence.Context;
 using Swashbuckle.AspNetCore.Filters;
 using System.Text;

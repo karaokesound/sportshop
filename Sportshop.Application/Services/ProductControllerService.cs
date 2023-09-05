@@ -6,7 +6,7 @@ using Sportshop.Domain.Entities;
 using Sportshop.Domain.Models;
 using System.IO;
 
-namespace Sportshop.API.Services
+namespace Sportshop.Application.Services
 {
     public class ProductControllerService : IProductControllerService
     {

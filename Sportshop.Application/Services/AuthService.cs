@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Sportshop.Application.Dtos.User;
 using Sportshop.Application.Repositories;
@@ -9,7 +10,7 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Sportshop.API.Services
+namespace Sportshop.Application.Services
 {
     public class AuthService : IAuthService
     {
@@ -67,17 +68,7 @@ namespace Sportshop.API.Services
             return tokenToReturn;
         }
 
-        public RefreshToken GenerateRefreshToken()
-        {
-            var refreshToken = new RefreshToken()
-            {
-                Token = Convert.ToBase64String(RandomNumberGenerator.GetBytes(64)),
-                Created = DateTime.Now,
-                Expires = DateTime.Now.AddDays(7)
-            };
-
-            return refreshToken;
-        }
+        
 
         public void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {

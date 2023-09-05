@@ -1,10 +1,11 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Sportshop.API.Services;
 using Sportshop.Application.Dtos.User;
 using Sportshop.Application.Repositories;
+using Sportshop.Application.Services;
 using Sportshop.Domain.Entities;
 using Sportshop.Domain.Models;
+using System.Security.Cryptography;
 
 namespace Sportshop.API.Controllers
 {
@@ -49,7 +50,7 @@ namespace Sportshop.API.Controllers
             var dbUser = await _userRepository.GetUserByNameAsync(user.Username);
 
             string userToken = _service.GenerateToken(dbUser);
-            RefreshToken userRefreshToken = _service.GenerateRefreshToken();
+            RefreshToken userRefreshToken = GenerateRefreshToken();
 
             SetRefreshToken(userRefreshToken, dbUser);
 
@@ -75,7 +76,7 @@ namespace Sportshop.API.Controllers
 
             string userToken = _service.GenerateToken(user);
 
-            var newUserRefreshToken = _service.GenerateRefreshToken();
+            var newUserRefreshToken = GenerateRefreshToken();
             SetRefreshToken(newUserRefreshToken, user);
 
             return Ok(userToken);
@@ -96,6 +97,18 @@ namespace Sportshop.API.Controllers
             user.TokenExpires = newRefreshToken.Expires;
 
             _userRepository.SaveChangesAsync();
+        }
+
+        private RefreshToken GenerateRefreshToken()
+        {
+            var refreshToken = new RefreshToken()
+            {
+                Token = Convert.ToBase64String(RandomNumberGenerator.GetBytes(64)),
+                Created = DateTime.Now,
+                Expires = DateTime.Now.AddDays(7)
+            };
+
+            return refreshToken;
         }
     }
 }

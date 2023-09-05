@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Sportshop.API.Services;
 using Sportshop.Application.Dtos;
+using Sportshop.Application.Services;
 using Sportshop.Domain.Models;
 
 namespace Sportshop.API.Controllers

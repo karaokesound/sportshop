@@ -1,15 +1,13 @@
 ﻿using Sportshop.Application.Dtos.User;
 using Sportshop.Domain.Entities;
 
-namespace Sportshop.API.Services
+namespace Sportshop.Application.Services
 {
     public interface IAuthService
     {
         Task CreateUser(UserDto requestedUser, byte[] passwordHash, byte[] passwordSalt);
 
         string GenerateToken(UserEntity user);
-
-        RefreshToken GenerateRefreshToken();
 
         void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt);
 

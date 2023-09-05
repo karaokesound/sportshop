@@ -1,7 +1,7 @@
 ﻿using Sportshop.Application.Dtos;
 using Sportshop.Domain.Models;
 
-namespace Sportshop.API.Services
+namespace Sportshop.Application.Services
 {
     public interface IProductControllerService
     {
