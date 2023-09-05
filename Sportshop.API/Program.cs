@@ -3,14 +3,13 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Sportshop.Application.Repositories;
 using Sportshop.Application.Services;
+using Sportshop.Persistence;
 using Sportshop.Persistence.Context;
 using Swashbuckle.AspNetCore.Filters;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
@@ -26,10 +25,11 @@ builder.Services.AddSwaggerGen(options =>
     options.OperationFilter<SecurityRequirementsOperationFilter>();
 });
 
-// My services
+// Database
 builder.Services.AddDbContext<SportshopDbContext>(dbContextOptions =>
     dbContextOptions.UseSqlServer(builder.Configuration["ConnectionStrings:SportshopDBConnectionString"]));
 
+// Authentication
 builder.Services.AddAuthentication("Bearer")
     .AddJwtBearer(options =>
     {
@@ -45,6 +45,7 @@ builder.Services.AddAuthentication("Bearer")
         };
     });
 
+// Services
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IAuthService, AuthService>();
@@ -54,7 +55,23 @@ builder.Services.AddScoped<IResponseService, ResponseService>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Database seeding
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    try
+    {
+        var context = services.GetRequiredService<SportshopDbContext>();
+        await DbSeeder.Seed(context);
+    }
+    catch (Exception ex)
+    {
+        var logger = services.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "An error occurred while seeding the database.");
+    }
+}
+
+// HTTP request pipeline
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
