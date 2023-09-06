@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
 
-namespace Sportshop.Application.Dtos.Product
+namespace Sportshop.Application.ReadModels.Dtos.Product
 {
     public class ThumbnailDto
     {

@@ -1,4 +1,4 @@
-﻿using Sportshop.Application.Dtos.User;
+﻿using Sportshop.Application.ReadModels.Dtos.Authentication;
 using Sportshop.Domain.Entities;
 
 namespace Sportshop.Application.Services

@@ -4,7 +4,11 @@ namespace Sportshop.Application.Repositories
 {
     public interface IProductRepository
     {
-        Task AddProductAsync(ProductEntity product);
+        Task CreateProductAsync(ProductEntity product);
+
+        Task<List<ProductEntity>> GetProductsAsync();
+
+        Task<ProductEntity> GetProductAsync(Guid productId);
 
         Task UpdateProductAsync();
 

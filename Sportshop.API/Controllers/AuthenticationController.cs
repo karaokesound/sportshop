@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Sportshop.Application.Dtos.User;
+using Sportshop.Application.ReadModels.Dtos.Authentication;
 using Sportshop.Application.Repositories;
 using Sportshop.Application.Services;
 using Sportshop.Domain.Entities;
@@ -29,7 +29,7 @@ namespace Sportshop.API.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<ActionResult<User>> Register(UserDto requestedUser)
+        public async Task<ActionResult<UserModel>> Register(UserDto requestedUser)
         {
             if (!await _service.UserDataValidation(requestedUser, 0)) return BadRequest("This username already exists. Try with another one!");
 

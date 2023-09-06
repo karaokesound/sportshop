@@ -1,4 +1,6 @@
-﻿using Sportshop.Domain.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using Sportshop.Domain.Entities;
+using Sportshop.Domain.Models;
 using Sportshop.Persistence.Context;
 
 namespace Sportshop.Application.Repositories
@@ -12,9 +14,22 @@ namespace Sportshop.Application.Repositories
             _context = context;
         }
 
-        public async Task AddProductAsync(ProductEntity product)
+        public async Task CreateProductAsync(ProductEntity product)
         {
             await _context.Products.AddAsync(product);
+        }
+
+        public async Task<List<ProductEntity>> GetProductsAsync()
+        {
+            return await _context.Products.ToListAsync();
+        }
+
+        public async Task<ProductEntity?> GetProductAsync(Guid productId)
+        {
+            var product = await _context.Products
+                .FirstOrDefaultAsync(p => p.Id == productId);
+
+            return product;
         }
 
         public Task UpdateProductAsync()

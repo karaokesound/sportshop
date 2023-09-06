@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Sportshop.Domain.Models
 {
-    public class Thumbnail
+    public class ThumbnailModel
     {
         [MaxLength(4)]
         public Guid Id { get; set; }

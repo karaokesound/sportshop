@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Sportshop.Application.Dtos.User
+namespace Sportshop.Application.ReadModels.Dtos.Authentication
 {
     public class UserForLoginDto
     {

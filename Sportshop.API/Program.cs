@@ -1,6 +1,9 @@
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Sportshop.Application.Commands.Products;
+using Sportshop.Application.Queries.Product;
 using Sportshop.Application.Repositories;
 using Sportshop.Application.Services;
 using Sportshop.Persistence;
@@ -11,6 +14,8 @@ using System.Text;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
+builder.Services.AddMediatR(x => x.AsScoped(), typeof(GetProductsQuery));
+builder.Services.AddMediatR(x => x.AsScoped(), typeof(CreateProductCommand));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {

@@ -1,8 +1,8 @@
-﻿using AutoMapper;
+﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Sportshop.Application.Dtos;
+using Sportshop.Application.Commands.Products;
+using Sportshop.Application.Queries.Product;
 using Sportshop.Application.Services;
-using Sportshop.Domain.Models;
 
 namespace Sportshop.API.Controllers
 {
@@ -10,70 +10,40 @@ namespace Sportshop.API.Controllers
     [Route("api/product")]
     public class ProductController : ControllerBase
     {
-        private readonly IProductControllerService _service;
+        private readonly IMediator _mediator;
 
-        private readonly IMapper _mapper;
-
-        private readonly IResponseService _responseService;
-
-        public ProductController(IProductControllerService service,
-            IMapper mapper,
-            IResponseService responseService)
+        public ProductController(IMediator mediator)
         {
-            _service = service;
-            _mapper = mapper;
-            _responseService = responseService;
+            _mediator = mediator;
         }
 
         [HttpPost]
         [Route("add")]
-        public async Task<ActionResult> AddProduct([FromForm] ProductDto requestedProduct)
+        public async Task<ActionResult> CreateProduct([FromForm] CreateProductCommand command)
         {
-            bool result = await _service.ProductDataValidation(requestedProduct);
+            var result = await _mediator.Send(command);
 
-            if (!result) return BadRequest("message");
-
-            var productThumbnail = await FormatThumbnail(requestedProduct);
-
-            await _service.AddProduct(requestedProduct, productThumbnail);
-
-            var response = _responseService.ProductCreated(requestedProduct);
-
-            return Ok(response);
+            return Ok(result);
         }
 
-        private async Task<Thumbnail> FormatThumbnail(ProductDto requestedProduct)
+        [HttpGet]
+        [Route("get")]
+        public async Task<ActionResult> GetProducts()
         {
-            Thumbnail thumbnail = new Thumbnail();
-            thumbnail.Id = Guid.NewGuid();
-            thumbnail.Content = requestedProduct.Thumbnail.Content;
+            var query = new GetProductsQuery();
+            var result = await _mediator.Send(query);
 
-            string[] productName = requestedProduct.Name.Split(" ");
-            string joinedProductName = string.Empty;
+            return Ok(result);
+        }
 
-            if (productName.Length < 4)
-            {
-                joinedProductName = string.Join("_", productName);
-            }
-            else
-            {
-                productName = productName
-                .Take(3)
-                .ToArray();
+        [HttpGet]
+        [Route("get/{productId}")]
+        public async Task<ActionResult> GetProduct(Guid productId)
+        {
+            var query = GetProduct(productId);
+            var result = await _mediator.Send(query);
 
-                joinedProductName = string.Join("_", productName);
-            }
-
-            thumbnail.FileName = $"{thumbnail.Id}-{joinedProductName}";
-            string path = Path.Combine(@"C:\\Users\\karao\\source\\repos\\sportshop\\Sportshop.Persistence\\Thumbnails",
-               thumbnail.FileName);
-
-            using (Stream stream = new FileStream(path, FileMode.Create))
-            {
-                await thumbnail.Content.CopyToAsync(stream);
-            }
-
-            return thumbnail;
+            return result != null ? Ok(result) : NotFound();
         }
     }
 }

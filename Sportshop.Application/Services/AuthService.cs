@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using Sportshop.Application.Dtos.User;
+using Sportshop.Application.ReadModels.Dtos.Authentication;
 using Sportshop.Application.Repositories;
 using Sportshop.Domain.Entities;
 using Sportshop.Domain.Models;
@@ -31,7 +31,7 @@ namespace Sportshop.Application.Services
 
         public async Task CreateUser(UserDto requestedUser, byte[] passwordHash, byte[] passwordSalt)
         {
-            var user = _mapper.Map<User>(requestedUser);
+            var user = _mapper.Map<UserModel>(requestedUser);
             user.PasswordHash = passwordHash;
             user.PasswordSalt = passwordSalt;
 

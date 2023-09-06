@@ -1,13 +1,13 @@
-﻿using Sportshop.Application.Dtos;
-using Sportshop.Application.Dtos.Product;
+﻿using Sportshop.Application.ReadModels.Dtos.Product;
+using Sportshop.Application.ReadModels.Responses;
 
 namespace Sportshop.Application.Services
 {
     public class ResponseService : IResponseService
     {
-        public ProductForResponse ProductCreated(ProductDto product)
+        public ProductResponse ProductCreated(ProductDto product)
         {
-            var response = new ProductForResponse()
+            var response = new ProductResponse()
             {
                 Message = "You've successfully created a new product! Details below:",
                 Name = product.Name,

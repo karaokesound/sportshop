@@ -1,6 +1,6 @@
 ﻿namespace Sportshop.Domain.Models
 {
-    public class Product
+    public class ProductModel
     {
         public Guid Id { get; set; }
 
@@ -19,6 +19,6 @@
         // Nullable foreign properties
         public Guid? UserId { get; set; }
 
-        public User? User { get; set; }
+        public UserModel? User { get; set; }
     }
 }

@@ -1,10 +1,10 @@
-﻿using Sportshop.Application.Dtos;
-using Sportshop.Application.Dtos.Product;
+﻿using Sportshop.Application.ReadModels.Dtos.Product;
+using Sportshop.Application.ReadModels.Responses;
 
 namespace Sportshop.Application.Services
 {
     public interface IResponseService
     {
-        ProductForResponse ProductCreated(ProductDto product);
+        ProductResponse ProductCreated(ProductDto product);
     }
 }

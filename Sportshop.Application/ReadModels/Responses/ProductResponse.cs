@@ -1,6 +1,6 @@
-﻿namespace Sportshop.Application.Dtos.Product
+﻿namespace Sportshop.Application.ReadModels.Responses
 {
-    public class ProductForResponse
+    public class ProductResponse
     {
         public string Message { get; set; } = null!;
 
