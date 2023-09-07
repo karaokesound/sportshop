@@ -1,9 +1,9 @@
 ﻿using MediatR;
 using System.ComponentModel.DataAnnotations;
 
-namespace Sportshop.Application.Commands.Authentication.CreateUser
+namespace Sportshop.Application.Commands.Users.Register
 {
-    public class CreateUserCommand : IRequest<CreateUserCommandResponse>
+    public class RegisterUserCommand : IRequest<RegisterUserCommandResponse>
     {
         [Required]
         [MaxLength(25)]

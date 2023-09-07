@@ -4,20 +4,20 @@ using Sportshop.Application.Repositories;
 using Sportshop.Application.Services.Authentication;
 using System.Security.Cryptography;
 
-namespace Sportshop.Application.Commands.Authentication.LoginUser
+namespace Sportshop.Application.Commands.Authentication.Login
 {
-    public class LoginUserCommandHandler : IRequestHandler<LoginUserCommand, TokenModel>
+    public class LoginCommandHandler : IRequestHandler<LoginCommand, TokenModel>
     {
         private readonly IUserRepository _userRepository;
         private readonly IJwtService _jwtService;
 
-        public LoginUserCommandHandler(IUserRepository userRepository, IJwtService jwtService)
+        public LoginCommandHandler(IUserRepository userRepository, IJwtService jwtService)
         {
             _userRepository = userRepository;
             _jwtService = jwtService;
         }
 
-        public async Task<TokenModel> Handle(LoginUserCommand request, CancellationToken cancellationToken)
+        public async Task<TokenModel> Handle(LoginCommand request, CancellationToken cancellationToken)
         {
             if (!await UserDataValidation(request)) return null!;
 
@@ -76,7 +76,7 @@ namespace Sportshop.Application.Commands.Authentication.LoginUser
         //    return tokenModel;
         //}
 
-        private async Task<bool> UserDataValidation(LoginUserCommand requestedUser)
+        private async Task<bool> UserDataValidation(LoginCommand requestedUser)
         {
             var dbUser = await _userRepository.GetUserByNameAsync(requestedUser.Username);
             bool passwordValidation = false;

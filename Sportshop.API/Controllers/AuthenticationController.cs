@@ -1,9 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Sportshop.Application.Commands.Authentication.CreateUser;
-using Sportshop.Application.Commands.Authentication.LoginUser;
+using Sportshop.Application.Commands.Authentication.Login;
 using Sportshop.Application.Commands.Authentication.RefreshToken;
-using Sportshop.Domain.Models;
 
 namespace Sportshop.API.Controllers
 {
@@ -18,16 +16,8 @@ namespace Sportshop.API.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost("register")]
-        public async Task<ActionResult<UserModel>> Register(CreateUserCommand command)
-        {
-            var result = await _mediator.Send(command);
-
-            return Ok(result);
-        }
-
         [HttpPost("login")]
-        public async Task<ActionResult<string>> Login(LoginUserCommand command)
+        public async Task<ActionResult<string>> Login(LoginCommand command)
         {
             TokenModel result = await _mediator.Send(command);
 

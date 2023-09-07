@@ -1,6 +1,6 @@
-﻿namespace Sportshop.Application.Commands.Authentication.CreateUser
+﻿namespace Sportshop.Application.Commands.Users.Register
 {
-    public class CreateUserCommandResponse
+    public class RegisterUserCommandResponse
     {
         public string Message { get; set; } = null!;
 

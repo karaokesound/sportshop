@@ -1,6 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Sportshop.Application.Commands.Users.Register;
 using Sportshop.Application.Queries.Users.GetUsers;
+using Sportshop.Domain.Models;
 
 namespace Sportshop.API.Controllers
 {
@@ -13,6 +15,14 @@ namespace Sportshop.API.Controllers
         public UsersController(IMediator mediator)
         {
             _mediator = mediator;
+        }
+
+        [HttpPost("register")]
+        public async Task<ActionResult<UserModel>> Register(RegisterUserCommand command)
+        {
+            var result = await _mediator.Send(command);
+
+            return Ok(result);
         }
 
         [HttpGet("get")]

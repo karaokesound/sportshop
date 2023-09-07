@@ -4,20 +4,20 @@ using Sportshop.Application.Repositories;
 using Sportshop.Domain.Entities;
 using System.Security.Cryptography;
 
-namespace Sportshop.Application.Commands.Authentication.CreateUser
+namespace Sportshop.Application.Commands.Users.Register
 {
-    public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, CreateUserCommandResponse>
+    public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, RegisterUserCommandResponse>
     {
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
 
-        public CreateUserCommandHandler(IUserRepository userRepository, IMapper mapper)
+        public RegisterUserCommandHandler(IUserRepository userRepository, IMapper mapper)
         {
             _userRepository = userRepository;
             _mapper = mapper;
         }
 
-        public async Task<CreateUserCommandResponse> Handle(CreateUserCommand request, CancellationToken cancellationToken)
+        public async Task<RegisterUserCommandResponse> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
         {
             if (!await UserDataValidation(request, 0)) return null;
 
@@ -30,13 +30,13 @@ namespace Sportshop.Application.Commands.Authentication.CreateUser
             await _userRepository.CreateUserAsync(userEntity);
             await _userRepository.SaveChangesAsync();
 
-            var response = _mapper.Map<CreateUserCommandResponse>(userEntity);
+            var response = _mapper.Map<RegisterUserCommandResponse>(userEntity);
             response.Message = "Success!";
 
             return response;
         }
 
-        private async Task<bool> UserDataValidation(CreateUserCommand requestedUser, int operationValue)
+        private async Task<bool> UserDataValidation(RegisterUserCommand requestedUser, int operationValue)
         {
             switch (operationValue)
             {
