@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Sportshop.Application.Commands.Authentication.CreateUser;
+using Sportshop.Application.Queries.Users.GetUsers;
 using Sportshop.Domain.Entities;
 
 namespace Sportshop.Application.Mappers.Profiles
@@ -8,8 +9,12 @@ namespace Sportshop.Application.Mappers.Profiles
     {
         public UserProfile()
         {
+            // CreateUser
             CreateMap<CreateUserCommand, UserEntity>();
             CreateMap<UserEntity, CreateUserCommandResponse>();
+
+            // GetUsers
+            CreateMap<UserEntity, GetUsersQueryResponse>();
         }
     }
 }

@@ -7,8 +7,8 @@ using Sportshop.Domain.Models;
 
 namespace Sportshop.API.Controllers
 {
-    [Route("api/authentication")]
     [ApiController]
+    [Route("api/authentication")]
     public class AuthenticationController : ControllerBase
     {
         private readonly IMediator _mediator;
