@@ -1,9 +1,7 @@
-﻿namespace Sportshop.Application.ReadModels.Responses
+﻿namespace Sportshop.Application.Queries.Product.GetProduct
 {
-    public class ProductResponse
+    public class GetProductQueryResponse
     {
-        public string Message { get; set; } = null!;
-
         public string Name { get; set; } = null!;
 
         public string Seller { get; set; } = null!;

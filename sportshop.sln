@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sportshop.Persistence", "Sp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sportshop.Application", "Sportshop.Application\Sportshop.Application.csproj", "{A36DD044-3FE2-4819-81A3-49E95060C6C7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sportshop.Domain", "Sportshop.Domain\Sportshop.Domain.csproj", "{F10E6A88-A6B3-4DD1-8BB5-AE52DD9E1308}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sportshop.Domain", "Sportshop.Domain\Sportshop.Domain.csproj", "{F10E6A88-A6B3-4DD1-8BB5-AE52DD9E1308}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

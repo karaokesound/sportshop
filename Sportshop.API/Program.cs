@@ -2,10 +2,11 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using Sportshop.Application.Commands.Products;
-using Sportshop.Application.Queries.Product;
+using Sportshop.Application.Commands.Products.CreateProduct;
+using Sportshop.Application.Queries.Product.GetProducts;
 using Sportshop.Application.Repositories;
 using Sportshop.Application.Services;
+using Sportshop.Application.Services.Authentication;
 using Sportshop.Persistence;
 using Sportshop.Persistence.Context;
 using Swashbuckle.AspNetCore.Filters;
@@ -53,10 +54,9 @@ builder.Services.AddAuthentication("Bearer")
 // Services
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<IAuthService, AuthService>();
-builder.Services.AddScoped<IProductControllerService, ProductControllerService>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IResponseService, ResponseService>();
+builder.Services.AddScoped<IJwtService, JwtService>();
 
 var app = builder.Build();
 

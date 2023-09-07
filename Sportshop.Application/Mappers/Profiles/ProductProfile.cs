@@ -1,8 +1,7 @@
 ﻿using AutoMapper;
-using Sportshop.Application.Commands.Products;
-using Sportshop.Application.ReadModels.Responses;
+using Sportshop.Application.Commands.Products.CreateProduct;
+using Sportshop.Application.Queries.Product.GetProduct;
 using Sportshop.Domain.Entities;
-using Sportshop.Domain.Models;
 
 namespace Sportshop.Application.Mappers.Profiles
 {
@@ -10,8 +9,9 @@ namespace Sportshop.Application.Mappers.Profiles
     {
         public ProductProfile()
         {
-            CreateMap<ProductEntity, ProductResponse>();
+            CreateMap<ProductEntity, GetProductQueryResponse>();
             CreateMap<CreateProductCommand, ProductEntity>();
+            CreateMap<ProductEntity, CreateProductCommandResponse>();
 
         }
     }

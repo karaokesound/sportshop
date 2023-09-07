@@ -1,13 +1,12 @@
 ﻿using AutoMapper;
 using MediatR;
-using Sportshop.Application.ReadModels.Responses;
 using Sportshop.Application.Repositories;
 using Sportshop.Domain.Entities;
 using Sportshop.Domain.Models;
 
-namespace Sportshop.Application.Commands.Products
+namespace Sportshop.Application.Commands.Products.CreateProduct
 {
-    public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand, ProductResponse>
+    public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand, CreateProductCommandResponse>
     {
         private readonly IProductRepository _productRepository;
         private readonly IMapper _mapper;
@@ -18,18 +17,21 @@ namespace Sportshop.Application.Commands.Products
             _mapper = mapper;
         }
 
-        public async Task<ProductResponse> Handle(CreateProductCommand request, CancellationToken cancellationToken)
+        public async Task<CreateProductCommandResponse> Handle(CreateProductCommand request, CancellationToken cancellationToken)
         {
             bool validation = await ProductDataValidation(request);
 
             if (!validation) return null;
 
-            var product = await AppendThumbnailIdToProduct(request);
+            var productEntity = await AppendThumbnailIdToProduct(request);
 
-            await _productRepository.CreateProductAsync(product);
+            await _productRepository.CreateProductAsync(productEntity);
             await _productRepository.SaveChangesAsync();
 
-            return _mapper.Map<ProductResponse>(product);
+            var response = _mapper.Map<CreateProductCommandResponse>(productEntity);
+            response.Message = "Success!";
+
+            return response;
         }
 
         private async Task<bool> ProductDataValidation(CreateProductCommand requestedProduct)

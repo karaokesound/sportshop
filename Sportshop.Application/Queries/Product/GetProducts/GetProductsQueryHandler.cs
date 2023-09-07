@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
 using MediatR;
-using Sportshop.Application.ReadModels.Responses;
+using Sportshop.Application.Queries.Product.GetProduct;
 using Sportshop.Application.Repositories;
 
-namespace Sportshop.Application.Queries.Product
+namespace Sportshop.Application.Queries.Product.GetProducts
 {
-    public class GetProductsQueryHandler : IRequestHandler<GetProductsQuery, List<ProductResponse>>
+    public class GetProductsQueryHandler : IRequestHandler<GetProductsQuery, List<GetProductQueryResponse>>
     {
         private readonly IProductRepository _productRepository;
         private readonly IMapper _mapper;
@@ -16,14 +16,14 @@ namespace Sportshop.Application.Queries.Product
             _mapper = mapper;
         }
 
-        public async Task<List<ProductResponse>> Handle(GetProductsQuery request, CancellationToken cancellationToken)
+        public async Task<List<GetProductQueryResponse>> Handle(GetProductsQuery request, CancellationToken cancellationToken)
         {
             var products = await _productRepository.GetProductsAsync();
-            var mappedProducts = new List<ProductResponse>();
+            var mappedProducts = new List<GetProductQueryResponse>();
 
             foreach (var product in products)
             {
-                mappedProducts.Add(_mapper.Map<ProductResponse>(product));
+                mappedProducts.Add(_mapper.Map<GetProductQueryResponse>(product));
             }
 
             return mappedProducts;

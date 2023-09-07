@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using MediatR;
+using System.ComponentModel.DataAnnotations;
 
-namespace Sportshop.Application.ReadModels.Dtos.Authentication
+namespace Sportshop.Application.Commands.Authentication.CreateUser
 {
-    public class UserDto
+    public class CreateUserCommand : IRequest<CreateUserCommandResponse>
     {
         [Required]
         [MaxLength(25)]

@@ -1,9 +1,8 @@
 ﻿using MediatR;
-using Sportshop.Application.ReadModels.Responses;
 
-namespace Sportshop.Application.Queries.Product
+namespace Sportshop.Application.Queries.Product.GetProduct
 {
-    public class GetProductQuery : IRequest<ProductResponse>
+    public class GetProductQuery : IRequest<GetProductQueryResponse>
     {
         public Guid ProductId { get; }
 

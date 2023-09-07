@@ -1,8 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Sportshop.Application.Commands.Products;
-using Sportshop.Application.Queries.Product;
-using Sportshop.Application.Services;
+using Sportshop.Application.Commands.Products.CreateProduct;
+using Sportshop.Application.Queries.Product.GetProduct;
+using Sportshop.Application.Queries.Product.GetProducts;
 
 namespace Sportshop.API.Controllers
 {
@@ -40,7 +40,7 @@ namespace Sportshop.API.Controllers
         [Route("get/{productId}")]
         public async Task<ActionResult> GetProduct(Guid productId)
         {
-            var query = GetProduct(productId);
+            var query = new GetProductQuery(productId);
             var result = await _mediator.Send(query);
 
             return result != null ? Ok(result) : NotFound();

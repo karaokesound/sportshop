@@ -1,11 +1,10 @@
 ﻿using MediatR;
-using Sportshop.Application.ReadModels.Dtos.Product;
-using Sportshop.Application.ReadModels.Responses;
+using Sportshop.Application.Dtos.Product;
 using System.ComponentModel.DataAnnotations;
 
-namespace Sportshop.Application.Commands.Products
+namespace Sportshop.Application.Commands.Products.CreateProduct
 {
-    public class CreateProductCommand : IRequest<ProductResponse>
+    public class CreateProductCommand : IRequest<CreateProductCommandResponse>
     {
         [Required]
         public string Name { get; set; } = null!;

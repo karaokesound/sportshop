@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\Authentication\" />
+    <Folder Include="Commands\Products\UpdateProduct\" />
     <Folder Include="Queries\Authentication\" />
   </ItemGroup>
 
