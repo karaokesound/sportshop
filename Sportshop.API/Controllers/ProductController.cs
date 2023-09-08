@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Sportshop.Application.Commands.Products.CreateProduct;
+using Sportshop.Application.Commands.Products.UpdateProduct;
 using Sportshop.Application.Queries.Product.GetProduct;
 using Sportshop.Application.Queries.Product.GetProducts;
 
@@ -42,6 +43,15 @@ namespace Sportshop.API.Controllers
         {
             var query = new GetProductQuery(productId);
             var result = await _mediator.Send(query);
+
+            return result != null ? Ok(result) : NotFound();
+        }
+
+        [HttpPut]
+        [Route("update")]
+        public async Task<ActionResult> UpdateProduct([FromForm]UpdateProductCommand command)
+        {
+            var result = await _mediator.Send(command);
 
             return result != null ? Ok(result) : NotFound();
         }

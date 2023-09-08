@@ -7,6 +7,7 @@ using Sportshop.Application.Queries.Product.GetProducts;
 using Sportshop.Application.Repositories;
 using Sportshop.Application.Services;
 using Sportshop.Application.Services.Authentication;
+using Sportshop.Application.Services.Product;
 using Sportshop.Persistence;
 using Sportshop.Persistence.Context;
 using Swashbuckle.AspNetCore.Filters;
@@ -57,6 +58,7 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IResponseService, ResponseService>();
 builder.Services.AddScoped<IJwtService, JwtService>();
+builder.Services.AddScoped<IProductService, ProductService>();
 
 var app = builder.Build();
 

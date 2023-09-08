@@ -10,7 +10,7 @@ namespace Sportshop.Application.Repositories
 
         Task<ProductEntity> GetProductAsync(Guid productId);
 
-        Task UpdateProductAsync();
+        Task<Guid> GetProductsThumbnailIdAsync(Guid productThumbnailId);
 
         Task PartiallyUpdateProductAsync();
 

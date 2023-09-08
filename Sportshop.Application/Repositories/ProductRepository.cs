@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Sportshop.Domain.Entities;
-using Sportshop.Domain.Models;
 using Sportshop.Persistence.Context;
 
 namespace Sportshop.Application.Repositories
@@ -32,9 +31,13 @@ namespace Sportshop.Application.Repositories
             return product;
         }
 
-        public Task UpdateProductAsync()
+        public async Task<Guid> GetProductsThumbnailIdAsync(Guid productThumbnailId)
         {
-            throw new NotImplementedException();
+            return await _context.Products
+                .Where(p => p.ThumbnailId == productThumbnailId)
+                .Select(p => p.ThumbnailId)
+                .FirstOrDefaultAsync();
+                
         }
 
         public Task PartiallyUpdateProductAsync()

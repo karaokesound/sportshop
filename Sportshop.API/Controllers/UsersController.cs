@@ -18,7 +18,7 @@ namespace Sportshop.API.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<ActionResult<UserModel>> Register(RegisterUserCommand command)
+        public async Task<ActionResult> Register([FromBody]RegisterUserCommand command)
         {
             var result = await _mediator.Send(command);
 

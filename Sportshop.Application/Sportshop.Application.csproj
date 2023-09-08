@@ -12,7 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\Products\UpdateProduct\" />
     <Folder Include="Queries\Authentication\" />
   </ItemGroup>
 
