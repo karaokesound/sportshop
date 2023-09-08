@@ -45,9 +45,9 @@ namespace Sportshop.Application.Repositories
             throw new NotImplementedException();
         }
 
-        public Task DeleteProductAsync()
+        public void DeleteProduct(ProductEntity product)
         {
-            throw new NotImplementedException();
+            _context.Products.Remove(product);
         }
 
         public async Task<bool> SaveChangesAsync()

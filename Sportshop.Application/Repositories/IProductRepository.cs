@@ -14,7 +14,7 @@ namespace Sportshop.Application.Repositories
 
         Task PartiallyUpdateProductAsync();
 
-        Task DeleteProductAsync();
+        void DeleteProduct(ProductEntity product);
 
         Task<bool> SaveChangesAsync();
     }
