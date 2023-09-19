@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Sportshop.Application.Commands.Users.Register;
 using Sportshop.Application.Queries.Users.GetUsers;
-using Sportshop.Domain.Models;
 
 namespace Sportshop.API.Controllers
 {

@@ -8,8 +8,9 @@ namespace Sportshop.Persistence
     {
         public async static Task Seed(SportshopDbContext context)
         {
-            // context.Database.EnsureCreated() does not use migrations to create the database and therefore the database that is created cannot be later updated using migrations 
-            // use context.Database.Migrate() instead
+            // context.Database.EnsureCreated() does not use migrations to create the database and therefore the
+            // database that is created cannot be later updated using migrations, use context.Database.Migrate()
+            // instead
             context.Database.Migrate();
 
             if (context.Products.Any())
@@ -17,7 +18,7 @@ namespace Sportshop.Persistence
                 return;
             }
 
-            // insert dummy data
+            // insert data
             await context.AddRangeAsync(GetDefaultProducts());
             await context.SaveChangesAsync();
         }

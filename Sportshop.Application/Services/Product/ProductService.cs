@@ -17,7 +17,8 @@ namespace Sportshop.Application.Services.Product
 
             thumbnail.FileName = GenerateThumbnailFileName(productName, thumbnail.Id);
 
-            string path = Path.Combine(@"C:\\Users\\karao\\source\\repos\\sportshop\\Sportshop.Persistence\\Thumbnails",
+            string path = Path.Combine(@"C:\\Users\\karao\\source\\repos\\sportshop\\Sportshop.Persistence\\
+                                        Thumbnails",
                thumbnail.FileName);
 
             using (Stream stream = new FileStream(path, FileMode.Create))
@@ -32,8 +33,8 @@ namespace Sportshop.Application.Services.Product
         {
             var fileName = GenerateThumbnailFileName(productName, thumbnailId);
 
-            string filePathToDelete = Path.Combine(@"C:\\Users\\karao\\source\\repos\\sportshop\\Sportshop.Persistence\\Thumbnails",
-               fileName);
+            string filePathToDelete = Path.Combine(@"C:\\Users\\karao\\source\\repos\\sportshop\\
+                                        Sportshop.Persistence\\Thumbnails", fileName);
 
             if (File.Exists(filePathToDelete))
             {
