@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Serilog;
 using Sportshop.Application.Commands.Authentication.Login;
 using Sportshop.Application.Commands.Products.CreateProduct;
 using Sportshop.Application.Extensions;
@@ -15,6 +16,7 @@ using Sportshop.Persistence;
 using Sportshop.Persistence.Context;
 using Swashbuckle.AspNetCore.Filters;
 using System.Text;
+using ILogger = Serilog.ILogger;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,11 +36,6 @@ builder.Services.AddSwaggerGen(options =>
     });
 
     options.OperationFilter<SecurityRequirementsOperationFilter>();
-});
-
-builder.Services.AddFluentValidation(cfg =>
-{
-    cfg.RegisterValidatorsFromAssemblyContaining<LoginCommand>();
 });
 
 // Database
@@ -68,8 +65,24 @@ builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IResponseService, ResponseService>();
 builder.Services.AddScoped<IJwtService, JwtService>();
 builder.Services.AddScoped<IProductService, ProductService>();
-
 builder.Services.AddTransient<GlobalExceptionsHandlingMiddleware>();
+
+// Serilog
+builder.Services.AddScoped<Serilog.ILogger>(_ =>
+{
+    return new LoggerConfiguration()
+        .ReadFrom.Configuration(builder.Configuration)
+    .CreateLogger();
+});
+
+// FluentValidation
+builder.Services.AddFluentValidation(cfg =>
+{
+    cfg.RegisterValidatorsFromAssemblyContaining<LoginCommand>();
+});
+
+builder.Host.UseSerilog();
+
 
 var app = builder.Build();
 
@@ -95,6 +108,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseSerilogRequestLogging();
 
 app.UseHttpsRedirection();
 
