@@ -1,0 +1,212 @@
+[
+    {
+        "Name": "Ręcznik frotte 70x140cm L Adidas",
+        "Description": "This is seeded product",
+        "Price": 2,
+        "Quantity": 10,
+        "Seller": "Dummy Seller"
+    },
+    {
+        "Name": "Trampolina Pumpkin 374cm 12ft Outtec",
+        "Description": "Stabilna i solidna konstrukcja to zasługa zaokrąglonego stelaża, który zapewnia optymalne napięcie siatki oraz podwójnych nóg w kształcie litery U.",
+        "Price": 999.00,
+        "Quantity": 2,
+        "Seller": "Outtec"
+    },
+    {
+        "Name": "Trampolina 91cm Hypermotion",
+        "Description": "Trampolina została wykonana z trwałych materiałów, które zapewniają komfort i bezpieczeństwo. Produkt posiada 6 nóżek z antypoślizgową nasadką, chroniącą przed poślizgiem oraz zapewniającą bardzo dobrą stabilność.",
+        "Price": 179.99,
+        "Quantity": 1,
+        "Seller": "Hypermotion"
+    },
+    {
+        "Name": "Komplet bielizny termoaktywnej dla motocyklistów BT0041 Stanteks",
+        "Description": "Wygodna termoaktywna odzież dla motocyklistów, wykonana w technologii płaskich szwów ze specjalnie opracowanych włókien poliestrowych. Miła w dotyku, elastyczna, bardzo dobrze dopasowujące się do ciała, nie ograniczająca ruchów",
+        "Price": 149.99,
+        "Quantity": 5,
+        "Seller": "Stanteks"
+    },
+    {
+        "Name": "Longsleeve męski Dry Park First Layer Nike",
+        "Description": "Longsleeve męski Dry Park First Layer Nike został wykonany poliestrowej tkaniny składającej się ze specjalnych mikrowłókien, które wspomagają naturalny system chłodzenia ciała. Raglanowe rękawy bez szwów sprawiają, że longsleeve męski Dry Park First Layer Nike nie będzie ograniczał Ci ruchów.",
+        "Price": 89.99,
+        "Quantity": 10,
+        "Seller": "Nike"
+    },
+    {
+        "Name": "Koszulka termoaktywna męska Rapid Spaio",
+        "Description": "Elastyczny materiał i bezszwowa konstrukcja dopasuje się do ciała oraz zapewni wygodę podczas każdej aktywności. Ustrzeże Cię także przed zbędnymi obtarciami, a przede wszystkim nie będzie krępować Twoich ruchów.",
+        "Price": 79.99,
+        "Quantity": 12,
+        "Seller": "Spalo"
+    },
+    {
+        "Name": "Podkoszulek termoaktywny długi rękaw męski BT0030 Stanteks",
+        "Description": "Bielizna termoaktywna różnego rodzaju ma pomagać w utrzymaniu odpowiedniej temperatury ciała oraz odprowadzaniu wilgoci z powierzchni skóry – co także wpływa na odczuwanie temperatury otoczenia.",
+        "Price": 69.99,
+        "Quantity": 14,
+        "Seller": "Stanteks"
+    },
+    {
+        "Name": "Bielizna termoaktywna męska Active Alpinus",
+        "Description": "Bielizna termoaktywna męska Active Alpinus znajdzie zastosowanie przede wszystkim podczas treningu w chłodniejsze dni. Wiatr czy ujemne temperatury nie będą żadną przeszkodą na Twojej drodze do osiągnięcia sportowego celu.",
+        "Price": 259.99,
+        "Quantity": 22,
+        "Seller": "Alpinus"
+    },
+    {
+        "Name": "Ręcznik szybkoschnący L 60x130cm Dr.Bacty",
+        "Description": "Nie jest trudno wybrać odpowiedni ręcznik? Jeśli często wyjeżdżasz, trenujesz i ogólnie jesteś aktywną osobą, wiesz też, że to bzdura. Wybór ręcznika jest skomplikowany, ale możesz go sobie ułatwić - postaw na model marki Dr. Bacty.",
+        "Price": 84.99,
+        "Quantity": 43,
+        "Seller": "Dr.Bacty"
+    },
+    {
+        "Name": "Rękawice bokserskie BXT-5127 Boxeur",
+        "Description": "Rękawice BXT-5127 włoskiej marki Boxeur wykonane zostały z materiału skóropodobnego, a wewnątrz wypełnione amortyzującą pianką EVA. Strefa uderzeniowa rękawicy połączona jest z kciukiem co uniemożliwia ewentualną jego kontuzję.",
+        "Price": 104.39,
+        "Quantity": 21,
+        "Seller": "Boxeur"
+    },
+    {
+        "Name": "Rękawice bokserskie Wrist Protect BB4 Bushido",
+        "Description": "Rękawice bokserskie BB4, to model zaprojektowany przez specjalistów marki Bushido z myślą o profesjonalnych zawodnikach. Ich solidna i dokładnie przemyślana konstrukcja składająca się z kilku warstw, dba o bezpieczeństwo podczas każdego uderzenia i zapobiega prostym kontuzjom, zwłaszcza nadgarstka.",
+        "Price": 207.00,
+        "Quantity": 12,
+        "Seller": "Bushido"
+    },
+    {
+        "Name": "Rękawice bokserskie Classic PU Allright",
+        "Description": "Klasyczne rękawice bokserskie Classic PU to propozycja marki Allright dla początkujących adeptów boksu.",
+        "Price": 122.30,
+        "Quantity": 15,
+        "Seller": "Allright"
+    },
+    {
+        "Name": "Rękawice bokserskie Classic PU Allright",
+        "Description": "Klasyczne rękawice bokserskie Classic PU to propozycja marki Allright dla początkujących adeptów boksu.",
+        "Price": 99.90,
+        "Quantity": 8,
+        "Seller": "Allright"
+    },
+    {
+        "Name": "Rękawice bokserskie Legend Overlord",
+        "Description": "Zostały skonstruowane z myślą o osobach średniozaawansowanych oraz zaczynających swoją przygodę ze sportami walki. Model Legend został wykonany z bardzo wytrzymałej skóry syntetycznej 100% PU FLEX.",
+        "Price": 149.99,
+        "Quantity": 22,
+        "Seller": "Overlord"
+    },
+    {
+        "Name": "Longsleeve męski Dry Park First Layer Nike",
+        "Description": "Utrzymuje ciepło i nie ogranicza prędkości - koszulka męska Dry Park First Layer marki Nike w stu procentach ochroni Cię przed zimnem.",
+        "Price": 89.99,
+        "Quantity": 6,
+        "Seller": "Nike"
+    },
+    {
+        "Name": "Piłka nożna Al Rihla Pro 5 Adidas",
+        "Description": "Al Rihla Pro wykonano w większości z wytrzymałego poliuretanu. Domieszka poliestru dodatkowo poprawia trwałość modelu, który będzie zachwycał przez długi czas, nawet przy częstym i intensywnym użytkowaniu.",
+        "Price": 469.99,
+        "Quantity": 2,
+        "Seller": "Adidas"
+    },
+    {
+        "Name": "Kurtka przeciwdeszczowa męska Alaska II Joma",
+        "Description": "Klasyczna odsłona sportowej kurtki przeciwdeszczowej Alaska, będzie doskonałym towarzyszem podczas Twoich treningów na świeżym powietrzu, a już w szczególności podczas niekorzystnej pogody.",
+        "Price": 71.99,
+        "Quantity": 30,
+        "Seller": "Joma"
+    },
+    {
+        "Name": "Buty piłkarskie halowe Spirit III IT Junior Puma",
+        "Description": "Buty Puma Spirit III IT Junior sprawdzą się dla dzieci, które trenują w klubach piłkarskich lub po prostu lubią grę w piłkę nożną. Będą idealne do trenowania w hali czy sali gimnastycznej zarówno w ramach zajęć sportowych, jak i zwykłego wychowania fizycznego.",
+        "Price": 99.99,
+        "Quantity": 34,
+        "Seller": "Dummy Seller"
+    },
+    {
+        "Name": "Koszulka męska AeroReady 3 Stripes Adidas",
+        "Description": "Poczuj się pewnie w męskiej koszulce z krótkim rękawem Adidas AeroReady 3 Stripes. Ta koszulka do biegania jest wyposażona w pochłaniającą wilgoć technologię AEROREADY, która zapewnia wygodę i komfort.",
+        "Price": 49.99,
+        "Quantity": 25,
+        "Seller": "Adidas"
+    },
+    {
+        "Name": "Komplet piłkarski męski Park VII + Park III Nike",
+        "Description": "Doskonały komplet piłkarski składający się z koszulki Park VII oraz spodenek Park III, to uniwersalna opcja od marki Nike. Klasyczny fason nie krępuje ruchów i sprawia, że zarówno koszulka jak i spodenki idealnie układają się na sylwetce.",
+        "Price": 129.98,
+        "Quantity": 10,
+        "Seller": "Nike"
+    },
+    {
+        "Name": "Spodenki męskie Parma 16 Adidas",
+        "Description": "Szorty zostały wyprodukowane z wysokiej jakości oddychającego materiału. Tkanina jest trwała, więc mimo częstego użycia spodenki wciąż będą świetnie wyglądać, a dzięki ściągaczowi w pasie - nawet w czasie szybkiego biegu pozostaną na swoim miejscu.",
+        "Price": 44.99,
+        "Quantity": 31,
+        "Seller": "Adidas"
+    },
+    {
+        "Name": "Rower magnetyczny Ride 100 Kettler",
+        "Description": "Rower magnetyczny Ride 100 zaprojektowany przez markę Kettler, jest podstawowym modelem, który może uzupełnić Twoją domową siłownię. Stworzony dla mniej wymagających użytkowników oraz tych, którzy sport traktują jako rekreacyjne hobby.",
+        "Price": 1899.99,
+        "Quantity": 3,
+        "Seller": "Kettler"
+    },
+    {
+        "Name": "Rower magnetyczny XB1500 Gymtek",
+        "Description": "Rozpoczynając aktywność w okresie zimowych i decydując się na odpowiedni dla Ciebie domowy sprzęt fitnessowy, nie możesz przejść obojętnie obok marki Gymtek. Rower magnetyczny XB1500 został stworzony właśnie z myślą o Tobie i Twojej kondycji.",
+        "Price": 949.00,
+        "Quantity": 16,
+        "Seller": "Gymtek"
+    },
+    {
+        "Name": "Buty Mach 5 HOKA",
+        "Description": "Niska waga obuwia przekłada się na komfort i mniejsze obciążenie stóp. Cholewka obuwia jest wegańska, co docenią osoby, które troszczą się o stan środowiska naturalnego. Tekstylna cholewka pozwala na cyrkulację powietrza, dzięki której stopy mniej się pocą.",
+        "Price": 769.99,
+        "Quantity": 16,
+        "Seller": "HOKA"
+    },
+    {
+        "Name": "Buty Downshifter 11 Nike",
+        "Description": "Buty Downshifter 11 Nike wykorzystasz podczas aktywności fizycznej. To obuwie znakomicie sprawdzi się podczas biegania. Wytrzymała konstrukcja i przemyślana budowa wspiera i otula stopę, zapewniając dopasowanie. Obuwie wspiera stopę nawet podczas intensywnego biegu.",
+        "Price": 244.7,
+        "Quantity": 7,
+        "Seller": "Nike"
+    },
+    {
+        "Name": "Buty Flyer Runner Mesh Puma",
+        "Description": "Buty zostały wykonane z dbałością o detale. Dlatego są lekkie i wytrzymałe.Siateczkowa cholewka umożliwia wentylację stóp, dzięki którym stopy mniej się pocą. Z przodu znajduje się ochrona palców, która chroni przed urazami.",
+        "Price": 159.99,
+        "Quantity": 20,
+        "Seller": "Puma"
+    },
+    {
+        "Name": "Buty Charged Bandit TR 2 Under Armour",
+        "Description": "Model ten został wykonany z wysokiej jakości materiału, a ich konstrukcja jest starannie przemyślana. Niezwykle lekka, klejona cholewka z połączenia siateczki i wzmacniającej gumy jest bardzo elastyczna i przewiewna, abyś nie musiał martwić się o prawidłową cyrkulację powietrza podczas intensywnego biegu.",
+        "Price": 367.00,
+        "Quantity": 10,
+        "Seller": "Under Armour"
+    },
+    {
+        "Name": "Namiot awaryjny 2-osobowy Survival Shelter 2 Lifesystems",
+        "Description": "Został wykonany z twardej tkaniny PU, a zatem jest trwały i solidny. Posiada okienko, otwór wentylacyjny, wodoodporne panele do siedzenia oraz odblaskowe paski górne, zapewniające dodatkowe bezpieczeństwo.",
+        "Price": 249.99,
+        "Quantity": 6,
+        "Seller": "Lifesystems"
+    },
+    {
+        "Name": "Torba termiczna Frosty Meteor",
+        "Description": "Frosty marki Meteor to praktyczna torba termiczna, którą wygodnie przeniesiesz na ramieniu lub w dłoni. 30 litrów pojemności jest gwarancją, że schłodzonych napojów Wam nie zabraknie. Wewnętrzna warstwa izolacyjna pomaga utrzymać niską temperaturę produktów nawet przez kilka godzin.",
+        "Price": 119.99,
+        "Quantity": 14,
+        "Seller": "Meteor"
+    },
+    {
+        "Name": "Termos obiadowy Food Jug 0.75L Esbit",
+        "Description": "Termos na żywność Food Jug marki Esbit, jest nowoczesnym i funkcjonalnym rozwiązaniem, które sprawdzi się w terenie oraz na co dzień w pracy. Jego dokładnie przemyślana konstrukcja oraz precyzyjnie dobrane komponenty, dbają o bezpieczeństwo Twojego posiłku, wysokiej jakości izolację oraz estetykę.",
+        "Price": 124.99,
+        "Quantity": 10,
+        "Seller": "Esbit"
+    }
+]

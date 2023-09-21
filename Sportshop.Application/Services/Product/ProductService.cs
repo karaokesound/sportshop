@@ -18,8 +18,7 @@ namespace Sportshop.Application.Services.Product
             thumbnail.FileName = GenerateThumbnailFileName(productName, thumbnail.Id);
 
             string path = Path.Combine(@"C:\\Users\\karao\\source\\repos\\sportshop\\Sportshop.Persistence\\
-                                        Thumbnails",
-               thumbnail.FileName);
+                                        Thumbnails", thumbnail.FileName);
 
             using (Stream stream = new FileStream(path, FileMode.Create))
             {

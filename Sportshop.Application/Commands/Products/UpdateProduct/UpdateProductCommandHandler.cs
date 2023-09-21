@@ -12,20 +12,23 @@ namespace Sportshop.Application.Commands.Products.UpdateProduct
         private readonly IProductRepository _productRepository;
         private readonly IProductService _productService;
 
-        public UpdateProductCommandHandler(IMapper mapper, IProductRepository productRepository, IProductService productService)
+        public UpdateProductCommandHandler(IMapper mapper, IProductRepository productRepository, 
+            IProductService productService)
         {
             _mapper = mapper;
             _productRepository = productRepository;
             _productService = productService;
         }
 
-        public async Task<UpdateProductCommandResponse> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
+        public async Task<UpdateProductCommandResponse> Handle(UpdateProductCommand request, 
+            CancellationToken cancellationToken)
         {
             var productEntity = await _productRepository.GetProductAsync(request.Id);
 
             if (productEntity == null) return null!;
 
             Guid productsThumbnailId = await _productRepository.GetProductsThumbnailIdAsync(productEntity.ThumbnailId);
+
             _productService.DeleteThumbnail(productsThumbnailId, productEntity.Name);
 
             var newThumbnail = new ThumbnailModel()
