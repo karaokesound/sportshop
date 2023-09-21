@@ -1,8 +1,11 @@
+using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Sportshop.Application.Commands.Authentication.Login;
 using Sportshop.Application.Commands.Products.CreateProduct;
+using Sportshop.Application.Extensions;
 using Sportshop.Application.Queries.Product.GetProducts;
 using Sportshop.Application.Repositories;
 using Sportshop.Application.Services;
@@ -16,6 +19,7 @@ using System.Text;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
+
 builder.Services.AddMediatR(x => x.AsScoped(), typeof(GetProductsQuery));
 builder.Services.AddMediatR(x => x.AsScoped(), typeof(CreateProductCommand));
 builder.Services.AddEndpointsApiExplorer();
@@ -30,6 +34,11 @@ builder.Services.AddSwaggerGen(options =>
     });
 
     options.OperationFilter<SecurityRequirementsOperationFilter>();
+});
+
+builder.Services.AddFluentValidation(cfg =>
+{
+    cfg.RegisterValidatorsFromAssemblyContaining<LoginCommand>();
 });
 
 // Database
@@ -59,6 +68,8 @@ builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IResponseService, ResponseService>();
 builder.Services.AddScoped<IJwtService, JwtService>();
 builder.Services.AddScoped<IProductService, ProductService>();
+
+builder.Services.AddTransient<GlobalExceptionsHandlingMiddleware>();
 
 var app = builder.Build();
 
@@ -93,9 +104,12 @@ app.UseAuthentication();
 
 app.UseAuthorization();
 
+app.UseMiddleware<GlobalExceptionsHandlingMiddleware>();
+
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllers();
+
 });
 
 app.Run();
