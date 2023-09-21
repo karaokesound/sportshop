@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Sportshop.Application.Exceptions;
 using Sportshop.Application.Repositories;
 using Sportshop.Domain.Entities;
 using System.Security.Cryptography;
@@ -19,7 +20,7 @@ namespace Sportshop.Application.Commands.Users.Register
 
         public async Task<RegisterUserCommandResponse> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
         {
-            if (!await UserDataValidation(request, 0)) return null;
+            if (!await UserDataValidation(request)) throw new RegisterErrorException("Test exception error");
 
             CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
 
@@ -36,31 +37,11 @@ namespace Sportshop.Application.Commands.Users.Register
             return response;
         }
 
-        private async Task<bool> UserDataValidation(RegisterUserCommand requestedUser, int operationValue)
+        private async Task<bool> UserDataValidation(RegisterUserCommand requestedUser)
         {
-            switch (operationValue)
-            {
-                case 0: // Registration
-                    bool usernameExists = await _userRepository.GetUserByNameAsync(requestedUser.Username) != null ? true : false;
+            bool usernameExists = await _userRepository.GetUserByNameAsync(requestedUser.Username) != null ? true : false;
 
-                    if (usernameExists) return false;
-                    break;
-
-                case 1: // Login
-                    var dbUser = await _userRepository.GetUserByNameAsync(requestedUser.Username);
-                    bool passwordValidation = false;
-
-                    if (dbUser != null)
-                    {
-                        var hmac = new HMACSHA512(dbUser.PasswordSalt!);
-                        var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(requestedUser.Password));
-
-                        passwordValidation = computedHash.SequenceEqual(dbUser.PasswordHash!);
-                    }
-
-                    if (dbUser == null || !passwordValidation) return false;
-                    break;
-            }
+            if (usernameExists) return false;
 
             return true;
         }

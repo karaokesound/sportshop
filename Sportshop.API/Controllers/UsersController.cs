@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Sportshop.Application.Commands.Users.Register;
 using Sportshop.Application.Queries.Users.GetUsers;
+using ILogger = Serilog.ILogger;
 
 namespace Sportshop.API.Controllers
 {
@@ -10,10 +11,12 @@ namespace Sportshop.API.Controllers
     public class UsersController : ControllerBase
     {
         private readonly IMediator _mediator;
+        private readonly ILogger _logger;
 
-        public UsersController(IMediator mediator)
+        public UsersController(IMediator mediator, ILogger logger)
         {
             _mediator = mediator;
+            _logger = logger;
         }
 
         [HttpPost("register")]
@@ -29,6 +32,8 @@ namespace Sportshop.API.Controllers
         {
             var query = new GetUsersQuery();
             var result = await _mediator.Send(query);
+
+            _logger.Information("My THIRD log => {@result}", result);
 
             return result != null ? Ok(result) : NotFound();
         }
