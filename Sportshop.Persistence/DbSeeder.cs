@@ -35,8 +35,9 @@ namespace Sportshop.Persistence
                 return;
             }
 
-            // insert data
-            await context.AddRangeAsync(GetDefaultProducts());
+            var products = await GetDefaultProducts();
+
+            await context.AddRangeAsync(products);
             await context.SaveChangesAsync();
         }
 
@@ -46,8 +47,6 @@ namespace Sportshop.Persistence
 
             try
             {
-                throw new Exception();
-
                 using FileStream stream = File.OpenRead(@"C:\Users\karao\source\repos\sportshop\Sportshop.Persistence\products.json");
                 var productsList = await JsonSerializer.DeserializeAsync<List<JsonProductDto>>(stream);
 
@@ -70,7 +69,7 @@ namespace Sportshop.Persistence
             }
             catch (Exception ex)
             {
-                _logger.Error("Error occurred in DbSeeder.cs class while seeding the database", ex);
+                _logger.Error("Error occurred in DbSeeder.cs class while seeding the database", ex.Message);
             }
 
             return productsEntitiesList;

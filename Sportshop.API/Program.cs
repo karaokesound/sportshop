@@ -16,7 +16,6 @@ using Sportshop.Persistence;
 using Sportshop.Persistence.Context;
 using Swashbuckle.AspNetCore.Filters;
 using System.Text;
-using ILogger = Serilog.ILogger;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -67,39 +66,34 @@ builder.Services.AddScoped<IJwtService, JwtService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddTransient<GlobalExceptionsHandlingMiddleware>();
 
-// Serilog
-builder.Services.AddScoped<Serilog.ILogger>(_ =>
-{
-    return new LoggerConfiguration()
-        .ReadFrom.Configuration(builder.Configuration)
-    .CreateLogger();
-});
-
 // FluentValidation
 builder.Services.AddFluentValidation(cfg =>
 {
     cfg.RegisterValidatorsFromAssemblyContaining<LoginCommand>();
 });
 
-builder.Host.UseSerilog();
+// Serilog for DI
+builder.Services.AddScoped<Serilog.ILogger>(_ =>
+{
+    return new LoggerConfiguration()
+        .ReadFrom.Configuration(builder.Configuration)
+        .CreateLogger();
+});
 
+// Serilog Configuration
+Log.Logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(builder.Configuration)
+    .CreateLogger();
+
+builder.Host.UseSerilog();
 
 var app = builder.Build();
 
 // Database seeding
 using (var scope = app.Services.CreateScope())
 {
-    var services = scope.ServiceProvider;
-    try
-    {
-        var context = services.GetRequiredService<SportshopDbContext>();
-        await DbSeeder.Seed(context);
-    }
-    catch (Exception ex)
-    {
-        var logger = services.GetRequiredService<ILogger<Program>>();
-        logger.LogError(ex, "An error occurred while seeding the database.");
-    }
+    var context = scope.ServiceProvider.GetRequiredService<SportshopDbContext>();
+    await DbSeeder.Seed(context);
 }
 
 // HTTP request pipeline
