@@ -9,6 +9,7 @@ using Sportshop.Application.Commands.Products.CreateProduct;
 using Sportshop.Application.Extensions;
 using Sportshop.Application.Queries.Product.GetProducts;
 using Sportshop.Application.Repositories;
+using Sportshop.Application.Services;
 using Sportshop.Application.Services.Authentication;
 using Sportshop.Application.Services.Product;
 using Sportshop.Persistence;
@@ -60,11 +61,18 @@ builder.Services.AddAuthentication("Bearer")
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IResponseService, ResponseService>();
 builder.Services.AddScoped<IJwtService, JwtService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddTransient<GlobalExceptionsHandlingMiddleware>();
 
-// Serilog Configuration for DI
+// FluentValidation
+builder.Services.AddFluentValidation(cfg =>
+{
+    cfg.RegisterValidatorsFromAssemblyContaining<LoginCommand>();
+});
+
+// Serilog for DI
 builder.Services.AddScoped<Serilog.ILogger>(_ =>
 {
     return new LoggerConfiguration()
@@ -77,12 +85,6 @@ Log.Logger = new LoggerConfiguration()
     .ReadFrom.Configuration(builder.Configuration)
     .CreateLogger();
 
-// FluentValidation
-builder.Services.AddFluentValidation(cfg =>
-{
-    cfg.RegisterValidatorsFromAssemblyContaining<LoginCommand>();
-});
-
 builder.Host.UseSerilog();
 
 var app = builder.Build();
@@ -90,17 +92,8 @@ var app = builder.Build();
 // Database seeding
 using (var scope = app.Services.CreateScope())
 {
-    var services = scope.ServiceProvider;
-    try
-    {
-        var context = services.GetRequiredService<SportshopDbContext>();
-        await DbSeeder.Seed(context);
-    }
-    catch (Exception ex)
-    {
-        var logger = services.GetRequiredService<ILogger<Program>>();
-        logger.LogError(ex, "An error occurred while seeding the database.");
-    }
+    var context = scope.ServiceProvider.GetRequiredService<SportshopDbContext>();
+    await DbSeeder.Seed(context);
 }
 
 // HTTP request pipeline
