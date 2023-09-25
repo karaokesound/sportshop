@@ -45,7 +45,7 @@ namespace Sportshop.Application.Commands.Products.CreateProduct
             await _productRepository.SaveChangesAsync();
 
             var response = _mapper.Map<CreateProductCommandResponse>(productEntity);
-            response.Message = "Success!";
+            response.Message = "Success! You've created the new product.";
 
             return response;
         }

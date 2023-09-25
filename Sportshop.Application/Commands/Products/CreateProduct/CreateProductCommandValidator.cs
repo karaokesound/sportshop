@@ -17,6 +17,12 @@ namespace Sportshop.Application.Commands.Products.CreateProduct
                 .MinimumLength(3).WithMessage("The Description field must be between 3-500 letters length.")
                 .MaximumLength(500).WithMessage("The Description field must be between 3-500 letters length.");
 
+            RuleFor(p => p.Price)
+                .Must(p => p <= 20000 && p >= 1).WithMessage("The Price field must be between 1-20000.");
+
+            RuleFor(p => p.Quantity)
+                .Must(p => p <= 1000 && p >= 1).WithMessage("The Quantity field must be between 1-1000.");
+
             RuleFor(p => p.Seller)
                 .MinimumLength(3).WithMessage("The Seller field must be between 3-25 letters length.")
                 .MaximumLength(25).WithMessage("The Seller field must be between 3-25 letters length.");

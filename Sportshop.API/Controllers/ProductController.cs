@@ -39,13 +39,13 @@ namespace Sportshop.API.Controllers
         }
 
         [HttpGet]
-        [Route("get/productId")]
+        [Route("get/{productId}")]
         public async Task<ActionResult> GetProduct(Guid productId)
         {
             var query = new GetProductQuery(productId);
             var result = await _mediator.Send(query);
 
-            return result != null ? Ok(result) : NotFound();
+            return Ok(result);
         }
 
         [HttpPut]
