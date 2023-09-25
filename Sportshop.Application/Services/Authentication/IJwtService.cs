@@ -8,5 +8,7 @@ namespace Sportshop.Application.Services.Authentication
         string GenerateToken(UserEntity user);
 
         TokenModel GenerateRefreshToken(UserEntity user, string token);
+
+        void SetRefreshToken(TokenModel token);
     }
 }

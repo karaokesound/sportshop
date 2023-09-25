@@ -33,14 +33,17 @@ namespace Sportshop.Application.Commands.Authentication.RefreshToken
             }
 
             string userToken = _jwtService.GenerateToken(userEntity);
-            TokenModel newUserRefreshToken = _jwtService.GenerateRefreshToken(userEntity, userToken);
+            TokenModel userAccessAndRefreshToken = _jwtService.GenerateRefreshToken(userEntity, userToken);
+
+            // Cookies
+            _jwtService.SetRefreshToken(userAccessAndRefreshToken);
 
             await _userRepository.SaveChangesAsync();
 
             return new RefreshTokenCommandResponse()
             {
-                Message = "New refresh token is generated.",
-                TokenModel = newUserRefreshToken
+                Message = "New refresh token:",
+                TokenModel = userAccessAndRefreshToken
             };
         }
     }

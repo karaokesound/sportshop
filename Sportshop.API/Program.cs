@@ -63,6 +63,7 @@ builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IJwtService, JwtService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddTransient<GlobalExceptionsHandlingMiddleware>();
+builder.Services.AddHttpContextAccessor();
 
 // FluentValidation
 builder.Services.AddFluentValidation(cfg =>

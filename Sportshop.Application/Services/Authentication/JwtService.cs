@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Sportshop.API;
 using Sportshop.Domain.Entities;
@@ -12,10 +13,12 @@ namespace Sportshop.Application.Services.Authentication
     public class JwtService : IJwtService
     {
         private readonly IConfiguration _configuration;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public JwtService(IConfiguration configuration)
+        public JwtService(IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
         {
             _configuration = configuration;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public string GenerateToken(UserEntity user)
@@ -61,6 +64,19 @@ namespace Sportshop.Application.Services.Authentication
             tokenModel.User.TokenExpires = tokenModel.RefreshTokenExpires;
 
             return tokenModel;
+        }
+
+        public void SetRefreshToken(TokenModel token)
+        {
+            var response = _httpContextAccessor.HttpContext!.Response;
+
+            var cookieOptions = new CookieOptions()
+            {
+                HttpOnly = true,
+                Expires = token.RefreshTokenExpires,
+            };
+
+            response.Cookies.Append("refreshToken", token.RefreshToken, cookieOptions);
         }
     }
 }

@@ -21,9 +21,8 @@ namespace Sportshop.API.Controllers
         {
             var result = await _mediator.Send(command);
 
-            SetRefreshToken(result.TokenModel);
-
-            return Ok($"{result.Message}\nYour token:\n{result.TokenModel.Token}");
+            return Ok($"{result.Message}\nAccess Token:\n{result.TokenModel.Token}" +
+                $"\nRefresh token:\n{result.TokenModel.RefreshToken}");
         }
 
         [HttpPost("refresh-token")]
@@ -31,20 +30,7 @@ namespace Sportshop.API.Controllers
         {
             var result = await _mediator.Send(command);
 
-            SetRefreshToken(result.TokenModel);
-
-            return Ok($"{result.Message}\nYour new refresh token:\n{result.TokenModel.RefreshToken}");
-        }
-
-        private void SetRefreshToken(TokenModel tokenModel)
-        {
-            var cookieOptions = new CookieOptions()
-            {
-                HttpOnly = true,
-                Expires = tokenModel.RefreshTokenExpires,
-            };
-
-            Response.Cookies.Append("refreshToken", tokenModel.RefreshToken, cookieOptions);
+            return Ok($"{result.Message}\n{result.TokenModel.RefreshToken}");
         }
     }
 }

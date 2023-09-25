@@ -26,14 +26,17 @@ namespace Sportshop.Application.Commands.Authentication.Login
             var userEntity = await _userRepository.GetUserByNameAsync(request.Username!);
 
             string userToken = _jwtService.GenerateToken(userEntity);
-            TokenModel newUserRefreshToken = _jwtService.GenerateRefreshToken(userEntity, userToken);
+            TokenModel userAccessAndRefreshToken = _jwtService.GenerateRefreshToken(userEntity, userToken);
+
+            // Cookies
+            _jwtService.SetRefreshToken(userAccessAndRefreshToken);
 
             await _userRepository.SaveChangesAsync();
 
             return new LoginCommandResponse()
             {
                 Message = "You've logged in!",
-                TokenModel = newUserRefreshToken
+                TokenModel = userAccessAndRefreshToken
             };
         }
 
