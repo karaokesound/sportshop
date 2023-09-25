@@ -1,15 +1,9 @@
-﻿using Sportshop.Application.Commands.Products.CreateProduct;
-using Sportshop.Domain.Models;
+﻿using Sportshop.Domain.Models;
 
 namespace Sportshop.Application.Services.Product
 {
     public class ProductService : IProductService
     {
-        public async Task<bool> ProductDataValidation(CreateProductCommand requestedProduct)
-        {
-            return true;
-        }
-
         public async Task<Guid> AppendThumbnailAndGetIdAsync(ThumbnailModel thumbnail, string productName)
         {
             thumbnail.Id = Guid.NewGuid();

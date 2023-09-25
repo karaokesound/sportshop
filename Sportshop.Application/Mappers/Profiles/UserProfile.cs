@@ -11,7 +11,6 @@ namespace Sportshop.Application.Mappers.Profiles
         {
             // CreateUser
             CreateMap<RegisterUserCommand, UserEntity>();
-            CreateMap<UserEntity, RegisterUserCommandResponse>();
 
             // GetUsers
             CreateMap<UserEntity, GetUsersQueryResponse>();

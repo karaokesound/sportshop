@@ -1,11 +1,12 @@
 ﻿using MediatR;
 using Sportshop.API;
+using Sportshop.Application.Exceptions;
 using Sportshop.Application.Repositories;
 using Sportshop.Application.Services.Authentication;
 
 namespace Sportshop.Application.Commands.Authentication.RefreshToken
 {
-    public class RefreshTokenCommandHandler : IRequestHandler<RefreshTokenCommand, TokenModel>
+    public class RefreshTokenCommandHandler : IRequestHandler<RefreshTokenCommand, RefreshTokenCommandResponse>
     {
         private readonly IUserRepository _userRepository;
         private readonly IJwtService _jwtService;
@@ -17,18 +18,18 @@ namespace Sportshop.Application.Commands.Authentication.RefreshToken
             _jwtService = jwtService;
         }
 
-        public async Task<TokenModel> Handle(RefreshTokenCommand request, CancellationToken cancellationToken)
+        public async Task<RefreshTokenCommandResponse> Handle(RefreshTokenCommand request, CancellationToken cancellationToken)
         {
             var userEntity = await _userRepository.GetUserByRefreshToken(request.RefreshToken);
 
             if (userEntity == null
                 || !userEntity.RefreshToken.Equals(request.RefreshToken))
             {
-                return null!;
+                throw new InvalidRefreshTokenException("Your token is invalid.");
             }
             else if (userEntity.TokenExpires < DateTime.Now)
             {
-                return null!;
+                throw new ExpiredRefreshTokenException("Your token has expired.");
             }
 
             string userToken = _jwtService.GenerateToken(userEntity);
@@ -36,7 +37,11 @@ namespace Sportshop.Application.Commands.Authentication.RefreshToken
 
             await _userRepository.SaveChangesAsync();
 
-            return newUserRefreshToken;
+            return new RefreshTokenCommandResponse()
+            {
+                Message = "New refresh token is generated.",
+                TokenModel = newUserRefreshToken
+            };
         }
     }
 }

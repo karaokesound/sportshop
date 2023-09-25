@@ -19,11 +19,11 @@ namespace Sportshop.API.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<string>> Login(LoginCommand command)
         {
-            TokenModel result = await _mediator.Send(command);
+            var result = await _mediator.Send(command);
 
-            SetRefreshToken(result);
+            SetRefreshToken(result.TokenModel);
 
-            return Ok(result.Token);
+            return Ok($"{result.Message}\nYour token:\n{result.TokenModel.Token}");
         }
 
         [HttpPost("refresh-token")]
@@ -31,9 +31,9 @@ namespace Sportshop.API.Controllers
         {
             var result = await _mediator.Send(command);
 
-            SetRefreshToken(result);
+            SetRefreshToken(result.TokenModel);
 
-            return Ok(result.RefreshToken);
+            return Ok($"{result.Message}\nYour new refresh token:\n{result.TokenModel.RefreshToken}");
         }
 
         private void SetRefreshToken(TokenModel tokenModel)

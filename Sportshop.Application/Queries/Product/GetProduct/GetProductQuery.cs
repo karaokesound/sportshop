@@ -4,11 +4,11 @@ namespace Sportshop.Application.Queries.Product.GetProduct
 {
     public class GetProductQuery : IRequest<GetProductQueryResponse>
     {
-        public Guid ProductId { get; }
+        public Guid Id { get; }
 
-        public GetProductQuery(Guid productId)
+        public GetProductQuery(Guid id)
         {
-            ProductId = productId;
+            Id = id;
         }
     }
 }

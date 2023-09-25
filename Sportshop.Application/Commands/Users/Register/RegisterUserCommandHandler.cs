@@ -20,9 +20,10 @@ namespace Sportshop.Application.Commands.Users.Register
 
         public async Task<RegisterUserCommandResponse> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
         {
-            if (!await UserDataValidation(request)) throw new RegisterErrorException("Test exception error");
+            if (await UserExists(request)) throw new InvalidRegisterDataException(
+                "This username is being used by another user. Try with another one.");
 
-            CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
+            CreatePasswordHash(request.Password!, out byte[] passwordHash, out byte[] passwordSalt);
 
             var userEntity = _mapper.Map<UserEntity>(request);
             userEntity.PasswordHash = passwordHash;
@@ -31,19 +32,22 @@ namespace Sportshop.Application.Commands.Users.Register
             await _userRepository.CreateUserAsync(userEntity);
             await _userRepository.SaveChangesAsync();
 
-            var response = _mapper.Map<RegisterUserCommandResponse>(userEntity);
-            response.Message = "Success!";
-
-            return response;
+            return new RegisterUserCommandResponse()
+            {
+                Message = "You've created a new account!",
+                Id = userEntity.Id,
+                Username = userEntity.Username
+            };
         }
 
-        private async Task<bool> UserDataValidation(RegisterUserCommand requestedUser)
+        private async Task<bool> UserExists(RegisterUserCommand requestedUser)
         {
-            bool usernameExists = await _userRepository.GetUserByNameAsync(requestedUser.Username) != null ? true : false;
+            bool usernameExists = await _userRepository.GetUserByNameAsync(requestedUser.Username!) 
+                != null ? true : false;
 
-            if (usernameExists) return false;
+            if (usernameExists) return true;
 
-            return true;
+            return false;
         }
 
         private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)

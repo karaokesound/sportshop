@@ -22,10 +22,6 @@ namespace Sportshop.Application.Commands.Products.CreateProduct
 
         public async Task<CreateProductCommandResponse> Handle(CreateProductCommand request, CancellationToken cancellationToken)
         {
-            bool validation = await _productService.ProductDataValidation(request);
-
-            if (!validation) return null!;
-
             var thumbnail = new ThumbnailModel()
             {
                 Content = request.Thumbnail.Content
@@ -42,7 +38,7 @@ namespace Sportshop.Application.Commands.Products.CreateProduct
                 Quantity = request.Quantity,
                 Seller = request.Seller,
                 ThumbnailId = thumbnailId,
-                // User and UserId are null
+                // User and UserId are null at this stage
             };
 
             await _productRepository.CreateProductAsync(productEntity);

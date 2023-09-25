@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Sportshop.Application.Exceptions;
 using Sportshop.Application.Repositories;
 using Sportshop.Application.Services.Product;
 using Sportshop.Domain.Models;
@@ -23,7 +24,8 @@ namespace Sportshop.Application.Commands.Products.UpdateProduct
         {
             var productEntity = await _productRepository.GetProductAsync(request.Id);
 
-            if (productEntity == null) return null!;
+            if (productEntity == null) throw new ProductNotFoundException(
+                $"Product with id {request.Id} was not found.");
 
             Guid productsThumbnailId = await _productRepository.GetProductsThumbnailIdAsync(productEntity.ThumbnailId);
             _productService.DeleteThumbnail(productsThumbnailId, productEntity.Name);
@@ -41,10 +43,17 @@ namespace Sportshop.Application.Commands.Products.UpdateProduct
 
             await _productRepository.SaveChangesAsync();
 
-            var response = new UpdateProductCommandResponse();
-            response.Message = "Success!";
-
-            return response;
+            return new UpdateProductCommandResponse()
+            {
+                Message = "You've successfully updated the product!",
+                Id = request.Id,
+                Name = request.Name,
+                Description = request.Description,
+                Price = request.Price,
+                Quantity = request.Quantity,
+                Seller = request.Seller,
+                ThumbnailId = newThumbnailId
+            };
         }
     }
 }

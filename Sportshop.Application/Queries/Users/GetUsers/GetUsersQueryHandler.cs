@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Sportshop.Application.Exceptions;
 using Sportshop.Application.Repositories;
 
 namespace Sportshop.Application.Queries.Users.GetUsers
@@ -18,6 +19,9 @@ namespace Sportshop.Application.Queries.Users.GetUsers
         public async Task<List<GetUsersQueryResponse>> Handle(GetUsersQuery request, CancellationToken cancellationToken)
         {
             var usersEntity = await _userRepository.GetUsersAsync();
+
+            if (usersEntity == null | usersEntity.Count == 0) throw new UsersNotFoundException(
+                "There are no users in the database.");
 
             var response = new List<GetUsersQueryResponse>();
 

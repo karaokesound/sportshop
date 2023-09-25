@@ -1,15 +1,11 @@
 ﻿using MediatR;
-using Sportshop.API;
-using System.ComponentModel.DataAnnotations;
 
 namespace Sportshop.Application.Commands.Authentication.Login
 {
-    public class LoginCommand : IRequest<TokenModel>
+    public class LoginCommand : IRequest<LoginCommandResponse>
     {
-        [Required]
-        public string Username { get; set; } = null!;
+        public string? Username { get; set; }
 
-        [Required]
-        public string Password { get; set; } = null!;
+        public string? Password { get; set; }
     }
 }

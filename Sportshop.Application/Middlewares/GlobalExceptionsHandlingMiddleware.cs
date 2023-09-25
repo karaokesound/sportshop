@@ -29,15 +29,21 @@ namespace Sportshop.Application.Extensions
         private async Task HandleExceptionAsync(HttpContext context, Exception exception)
         {
             context.Response.ContentType = "application/json";
-
+            
             var errorDetails = exception switch
             {
-                RegisterErrorException => new ErrorModel(context.Response.StatusCode.ToString(), exception.Message)
+                ExpiredRefreshTokenException => new ErrorModel(StatusCodes.Status405MethodNotAllowed, exception.Message),
+                InvalidLoginDataException => new ErrorModel(StatusCodes.Status400BadRequest, exception.Message),
+                InvalidRefreshTokenException => new ErrorModel(StatusCodes.Status405MethodNotAllowed, exception.Message),
+                InvalidRegisterDataException => new ErrorModel(StatusCodes.Status400BadRequest, exception.Message),
+                ProductNotFoundException => new ErrorModel(StatusCodes.Status400BadRequest, exception.Message),
+                ProductsNotFoundException => new ErrorModel(StatusCodes.Status400BadRequest, exception.Message),
+                UsersNotFoundException => new ErrorModel(StatusCodes.Status400BadRequest, exception.Message),
             };
 
             _logger.Error(exception.Message);
 
-            context.Response.StatusCode = int.Parse(errorDetails.FieldName);
+            context.Response.StatusCode = errorDetails.StatusCode;
             await context.Response.WriteAsync(errorDetails.ToString());
         }
     }

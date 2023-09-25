@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Sportshop.Application.Exceptions;
 using Sportshop.Application.Queries.Product.GetProduct;
 using Sportshop.Application.Repositories;
 
@@ -19,6 +20,10 @@ namespace Sportshop.Application.Queries.Product.GetProducts
         public async Task<List<GetProductQueryResponse>> Handle(GetProductsQuery request, CancellationToken cancellationToken)
         {
             var products = await _productRepository.GetProductsAsync();
+
+            if (products == null || products.Count == 0) throw new ProductsNotFoundException(
+                "There are no products in the database.");
+
             var mappedProducts = new List<GetProductQueryResponse>();
 
             foreach (var product in products)

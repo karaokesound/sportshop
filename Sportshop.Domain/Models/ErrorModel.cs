@@ -4,20 +4,19 @@ namespace Sportshop.Domain.Models
 {
     public class ErrorModel
     {
-        public string FieldName { get; set; } = null!;
+        public int StatusCode { get; set; }
 
-        public string Error { get; set; } = null!;
+        public string Message { get; set; } = null!;
 
-        public ErrorModel(string fieldName, string error)
+        public ErrorModel(int statusCode, string message)
         {
-            FieldName = fieldName;
-            Error = error;
+            Message = message;
+            StatusCode = statusCode;
         }
 
         public override string ToString()
         {
             return JsonConvert.SerializeObject(this);
         }
-
     }
 }

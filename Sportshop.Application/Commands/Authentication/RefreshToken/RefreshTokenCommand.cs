@@ -3,7 +3,7 @@ using Sportshop.API;
 
 namespace Sportshop.Application.Commands.Authentication.RefreshToken
 {
-    public class RefreshTokenCommand : IRequest<TokenModel>
+    public class RefreshTokenCommand : IRequest<RefreshTokenCommandResponse>
     {
         public string AccessToken { get; set; } = null!;
 

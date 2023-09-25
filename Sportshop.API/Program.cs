@@ -9,14 +9,12 @@ using Sportshop.Application.Commands.Products.CreateProduct;
 using Sportshop.Application.Extensions;
 using Sportshop.Application.Queries.Product.GetProducts;
 using Sportshop.Application.Repositories;
-using Sportshop.Application.Services;
 using Sportshop.Application.Services.Authentication;
 using Sportshop.Application.Services.Product;
 using Sportshop.Persistence;
 using Sportshop.Persistence.Context;
 using Swashbuckle.AspNetCore.Filters;
 using System.Text;
-using ILogger = Serilog.ILogger;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -62,18 +60,22 @@ builder.Services.AddAuthentication("Bearer")
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
-builder.Services.AddScoped<IResponseService, ResponseService>();
 builder.Services.AddScoped<IJwtService, JwtService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddTransient<GlobalExceptionsHandlingMiddleware>();
 
-// Serilog
+// Serilog Configuration for DI
 builder.Services.AddScoped<Serilog.ILogger>(_ =>
 {
     return new LoggerConfiguration()
         .ReadFrom.Configuration(builder.Configuration)
-    .CreateLogger();
+        .CreateLogger();
 });
+
+// Serilog Configuration
+Log.Logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(builder.Configuration)
+    .CreateLogger();
 
 // FluentValidation
 builder.Services.AddFluentValidation(cfg =>
@@ -82,7 +84,6 @@ builder.Services.AddFluentValidation(cfg =>
 });
 
 builder.Host.UseSerilog();
-
 
 var app = builder.Build();
 
