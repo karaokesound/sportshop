@@ -36,9 +36,10 @@ namespace Sportshop.Application.Extensions
                 InvalidLoginDataException => new ErrorModel(StatusCodes.Status400BadRequest, exception.Message),
                 InvalidRefreshTokenException => new ErrorModel(StatusCodes.Status405MethodNotAllowed, exception.Message),
                 InvalidRegisterDataException => new ErrorModel(StatusCodes.Status400BadRequest, exception.Message),
-                ProductNotFoundException => new ErrorModel(StatusCodes.Status400BadRequest, exception.Message),
-                ProductsNotFoundException => new ErrorModel(StatusCodes.Status400BadRequest, exception.Message),
-                UsersNotFoundException => new ErrorModel(StatusCodes.Status400BadRequest, exception.Message),
+                ProductNotFoundException => new ErrorModel(StatusCodes.Status404NotFound, exception.Message),
+                ProductsNotFoundException => new ErrorModel(StatusCodes.Status404NotFound, exception.Message),
+                UsersNotFoundException => new ErrorModel(StatusCodes.Status404NotFound, exception.Message),
+                DatabaseStateException => new ErrorModel(StatusCodes.Status404NotFound, exception.Message),
             };
 
             _logger.Error(exception.Message);

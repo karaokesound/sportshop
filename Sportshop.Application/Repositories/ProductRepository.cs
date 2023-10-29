@@ -18,9 +18,12 @@ namespace Sportshop.Application.Repositories
             await _context.Products.AddAsync(product);
         }
 
-        public async Task<List<ProductEntity>> GetProductsAsync()
+        public async Task<List<ProductEntity>> GetProductsAsync(int numberOfProductsToTake, int numberOfProductsToSkip)
         {
-            return await _context.Products.ToListAsync();
+            return await _context.Products
+                .Skip(numberOfProductsToSkip)
+                .Take(numberOfProductsToTake)
+                .ToListAsync();
         }
 
         public async Task<ProductEntity?> GetProductAsync(Guid productId)
@@ -48,6 +51,11 @@ namespace Sportshop.Application.Repositories
         public void DeleteProduct(ProductEntity product)
         {
             _context.Products.Remove(product);
+        }
+
+        public async Task<int> GetDatabaseState()
+        {
+            return await _context.Products.CountAsync();
         }
 
         public async Task<bool> SaveChangesAsync()

@@ -7,12 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Sportshop.Domain\Sportshop.Domain.csproj" />
-    <ProjectReference Include="..\Sportshop.Persistence\Sportshop.Persistence.csproj" />
+    <Compile Remove="Queries\Authentication\**" />
+    <EmbeddedResource Remove="Queries\Authentication\**" />
+    <None Remove="Queries\Authentication\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Queries\Authentication\" />
+    <ProjectReference Include="..\Sportshop.Domain\Sportshop.Domain.csproj" />
+    <ProjectReference Include="..\Sportshop.Persistence\Sportshop.Persistence.csproj" />
   </ItemGroup>
 
   <ItemGroup>
