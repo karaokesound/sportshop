@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Sportshop.Application.Commands.Products.CreateProduct;
 using Sportshop.Application.Commands.Products.DeleteProduct;
 using Sportshop.Application.Commands.Products.UpdateProduct;
+using Sportshop.Application.Queries.Product.GetDatabaseState;
 using Sportshop.Application.Queries.Product.GetProduct;
 using Sportshop.Application.Queries.Product.GetProducts;
 
@@ -29,10 +30,10 @@ namespace Sportshop.API.Controllers
         }
 
         [HttpGet]
-        [Route("get")]
-        public async Task<ActionResult> GetProducts()
+        [Route("get/{page}/{numberOfItemsToTake}")]
+        public async Task<ActionResult> GetProducts(int page, int numberOfItemsToTake)
         {
-            var query = new GetProductsQuery();
+            var query = new GetProductsQuery(page, numberOfItemsToTake);
             var result = await _mediator.Send(query);
 
             return Ok(result);
@@ -64,6 +65,16 @@ namespace Sportshop.API.Controllers
             var result = await _mediator.Send(command);
 
             return Ok(result);
+        }
+
+        [HttpGet]
+        [Route("state")]
+        public async Task<ActionResult> GetDatabaseState()
+        {
+            var query = new GetDatabaseStateQuery();
+            var result = await _mediator.Send(query);
+
+            return result != null ? Ok(result) : NotFound();
         }
     }
 }

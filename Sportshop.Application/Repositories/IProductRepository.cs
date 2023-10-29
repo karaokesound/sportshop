@@ -6,7 +6,7 @@ namespace Sportshop.Application.Repositories
     {
         Task CreateProductAsync(ProductEntity product);
 
-        Task<List<ProductEntity>> GetProductsAsync();
+        Task<List<ProductEntity>> GetProductsAsync(int numberOfProductsToTake, int numberOfProductsToSkip);
 
         Task<ProductEntity> GetProductAsync(Guid productId);
 
@@ -15,6 +15,8 @@ namespace Sportshop.Application.Repositories
         Task PartiallyUpdateProductAsync();
 
         void DeleteProduct(ProductEntity product);
+
+        Task<int> GetDatabaseState();
 
         Task<bool> SaveChangesAsync();
     }
