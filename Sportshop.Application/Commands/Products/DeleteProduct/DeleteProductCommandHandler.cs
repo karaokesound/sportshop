@@ -28,7 +28,8 @@ namespace Sportshop.Application.Commands.Products.DeleteProduct
                 Message = "Success! You've deleted the product!",
                 Name = product.Name,
                 Price = product.Price,
-                Seller = product.Seller
+                Seller = product.Brand,
+                Category = product.Category
             };
 
             return response;

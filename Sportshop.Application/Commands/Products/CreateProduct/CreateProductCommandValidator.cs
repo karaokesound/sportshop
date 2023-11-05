@@ -23,9 +23,11 @@ namespace Sportshop.Application.Commands.Products.CreateProduct
             RuleFor(p => p.Quantity)
                 .Must(p => p <= 1000 && p >= 1).WithMessage("The Quantity field must be between 1-1000.");
 
-            RuleFor(p => p.Seller)
+            RuleFor(p => p.Brand)
                 .MinimumLength(3).WithMessage("The Seller field must be between 3-25 letters length.")
                 .MaximumLength(25).WithMessage("The Seller field must be between 3-25 letters length.");
+
+            // rozkminić kategorie
         }
     }
 }

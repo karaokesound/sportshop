@@ -16,7 +16,8 @@ namespace Sportshop.Persistence.Configurations
             builder.Property(p => p.Description);
             builder.Property(p => p.Price);
             builder.Property(p => p.Quantity);
-            builder.Property(p => p.Seller);
+            builder.Property(p => p.Brand);
+            builder.Property(p => p.Category);
             builder.Property(p => p.ThumbnailId)
                 .HasMaxLength(4);
         }

@@ -11,14 +11,11 @@ namespace Sportshop.Persistence
         private class JsonProductDto
         {
             public string Name { get; set; } = null!;
-
             public string Description { get; set; } = null!;
-
             public decimal Price { get; set; }
-
             public int Quantity { get; set; }
-
-            public string Seller { get; set; } = null!;
+            public string Brand { get; set; } = null!;
+            public string Category { get; set; } = null!;
         }
 
         private readonly static ILogger _logger = Log.ForContext(typeof(DbSeeder));
@@ -59,7 +56,8 @@ namespace Sportshop.Persistence
                         Description = product.Description,
                         Price = product.Price,
                         Quantity = product.Quantity,
-                        Seller = product.Seller,
+                        Brand = product.Brand,
+                        Category = product.Category,
                         ThumbnailId = Guid.NewGuid()
 
                     };

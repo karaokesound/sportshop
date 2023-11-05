@@ -36,7 +36,8 @@ namespace Sportshop.Application.Commands.Products.CreateProduct
                 Description = request.Description,
                 Price = request.Price,
                 Quantity = request.Quantity,
-                Seller = request.Seller,
+                Brand = request.Brand,
+                Category = request.Category,
                 ThumbnailId = thumbnailId,
                 // User and UserId are null at this stage
             };
